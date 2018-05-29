@@ -1,74 +1,106 @@
 <template>
-  <div class="container">
-    <headNav v-if="client"></headNav>
-     <yd-infinitescroll :callback="refresh" ref="infinitescrollDemo">
-        <yd-list theme="1" slot="list">
-            <yd-list-item v-for="item, key in data" :key="key">
-                <img slot="img" :src="item.img">
-                <span slot="title">{{item.title}}</span>
-                <yd-list-other slot="other">
-                    <div>{{item.ct}}</div>
-                </yd-list-other>
-            </yd-list-item>
-        </yd-list>
-        <!-- 数据全部加载完毕显示 -->
-        <span slot="doneTip">啦啦啦，啦啦啦，没有数据啦~~</span>
-        <!-- 加载中提示，不指定，将显示默认加载中图标 -->
-        <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
-
-    </yd-infinitescroll>
+  <div class="bggray">
+       <titleHead :bg="'#F7F7F7'" :fixed="true"></titleHead>
+        <button @click="scroll()">点击以向下滚动100像素</button>
+       <yd-pullrefresh class="scroll scroll-a" :callback="loadListUp" ref="prdemo">
+            <yd-infinitescroll :callback="loadListDown" ref="ls">
+                <yd-list theme="4" slot="list">
+                  <div class="list-child" v-for="item,key in list" :key="key">
+                     <bannerd :bannerData="item" :serverTime="serverTime"></bannerd>
+                  </div>  
+                </yd-list>
+                <span slot="doneTip">啦啦啦，啦啦啦，没有数据啦~~</span>
+                <!-- 加载中提示，不指定，将显示默认加载中图标 -->
+                <div slot="loadingTip">
+                  <scrolLoading></scrolLoading>
+                </div>
+            </yd-infinitescroll>
+            <yd-backtop></yd-backtop>
+    </yd-pullrefresh>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import headNav from '@/components/common/head'
+import titleHead from '@/components/common/Title/Thead.vue'
+import bannerd from '@/components/banner/banner-d.vue'
+import scrolLoading from '@/components/common/scrolLoading'
 export default {
-  name: 'demo',
   components: {
-        headNav
+        titleHead,
+        bannerd,
+        scrolLoading
     },
   data () {
     return {
-      client: true,
-      page: 1,
-      data:[]
+        list: [],
+        postData:{
+          page: 1,
+          rows: 10,
+          state:[4]
+        }
     }
   },
+  // 计算属性   serverTime服务器时间
   computed: {
-      
+      serverTime () {
+        return this.$store.state.server.serverTime
+      }
   },
   methods: {
-    async refresh () {
-      let replytime = Date.now();
-      let _data = await this.api.getPetals(replytime, this.page,10);
-      let lastPage = JSON.parse(_data).showapi_res_body.allPages
-       _data = JSON.parse(_data).showapi_res_body.contentlist
-       console.table(_data)
-      if(this.page == 1){
-        this.data = _data
-      }else {
-        this.data =  [...this.data, ..._data];
-      }
-      if (_data.length < 10 || this.page == lastPage) {
-          /* 所有数据加载完毕 */
-          this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
-          return;
-      }
-      /* 单次请求数据完毕 */
-      this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.finishLoad');
-      this.page ++
-    },
+     // 下载刷新，重新获取新数据
+        loadListUp() {
+            this.ajaxPost('auction/sessionInfoPage',this.postData,(res) => {
+                this.$store.dispatch('getServerTime');
+                const _list = res.data.dataList;
+                this.list = _list;
+                this.$dialog.toast({
+                    mes:'更新成功'
+                });
+                this.postData.page = 1;
+                // return false;
+                this.$refs.prdemo.$emit('ydui.pullrefresh.finishLoad');
+            })
+        },
+        // 滚动加载
+        loadListDown() {
+
+          this.ajaxPost('auction/sessionInfoPage',this.postData,(res) => {
+
+              this.$store.dispatch('getServerTime');
+              const _list = res.data.dataList;
+              this.list = [...this.list, ..._list];
+              this.$nextTick(function(){
+                this.scroll()
+            })
+                
+              // 当最后一页的数据少于一页的数据或者页数等于后台返回的总页数时，就是全部加载完毕
+              if (_list.length < this.postData.rows || this.postData.page >= res.data.pageCount) {
+                  // 所有数据加载完毕
+                  this.$refs.ls.$emit('ydui.infinitescroll.loadedDone');
+                  return;
+              }
+              // 单次请求数据完毕
+              this.$refs.ls.$emit('ydui.infinitescroll.finishLoad');
+              this.postData.page++;
+             
+          })
+        },
+        scroll() {
+          window.scroll(0, 200)
+        }
   },
   mounted() {
-     this.refresh();
-     // 设备入口判断
-     if(this.$route.query.type == 'ios'){
-        this.client = false;
-     }
+ 
+
+    this.$nextTick(function(){
+        this.loadListDown()
+        console.log(window)
+
+    })
+
+
   },
   watch: {
-    // 如有必要再加路由监听
     $route() {
        
     }
@@ -76,20 +108,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+ 
 </style>

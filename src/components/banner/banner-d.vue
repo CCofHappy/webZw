@@ -1,8 +1,8 @@
 <!-- 正在拍卖轮播类型 -->
  <template>
-  <div class="tembg">
+  <div>
     <router-link :to="{name:'sessionDetail',params:{seq: `${bannerData.auctionSessionSeq}`}}">
-        <div class="clearfix margin-bottom-sm">
+        <div class="lists clearfix margin-bottom-sm">
           <div class="pull-left text-left">
              <div class="cntitle text-left">{{bannerData.auctionSessionName}}</div>
              <!-- 预展中和拍卖中的都要显示倒计时 -->
@@ -11,7 +11,7 @@
              <span v-if="bannerData.state > 3" class="gray">结束时间：{{formtDate(bannerData.auctionSessionEnd,3)}}</span>
           </div>
           <div class="pull-right">
-            <p class="gray padding-top-sm">围观：<span class="fred">{{bannerData.surroundCatchCount}}次</span></p>
+            <p class="gray">围观：<span class="fred">{{bannerData.surroundCatchCount}}次</span></p>
           </div>
         </div>
     </router-link>
@@ -113,11 +113,5 @@ export default {
 .btext>div {
   margin-top: .1rem;
 }
-.tembg {
-  padding-left: .2rem;
-  padding-right: .2rem;
-  padding-bottom: .5rem;
-  background: white;
-  position: relative;;
-}
+
 </style>

@@ -83,7 +83,7 @@ export default {
    
     validateBeforeSubmit() {
       validForm(this,() => {
-        fly.post('/person/register',{customerName:this.customerName,telephone:this.telephone,smsCode:this.smsCode,password:this.password,passwordAgain:this.passwordAgain})
+        fly.post('app/person/register',{customerName:this.customerName,telephone:this.telephone,smsCode:this.smsCode,password:this.password,passwordAgain:this.passwordAgain})
         .then((res) => {
           if(res.state ==1){
             this.$dialog.toast({ mes: '注册成功，2秒后跳转到登录页面'});

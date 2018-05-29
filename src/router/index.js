@@ -21,7 +21,8 @@ export default new Router({
 				component: resolve => require(['../pages/home/home.vue'], resolve),
 				meta: {
 					title: '首页',
-					requireAuth: false
+					requireAuth: false,
+					keepAlive: true
 				}
 			},
 			{
@@ -30,9 +31,20 @@ export default new Router({
 				component: resolve => require(['../pages/user/user.vue'], resolve),
 				meta: {
 					title: '个人中心',
-					requireAuth: true
+					requireAuth: true,
+					keepAlive: true
 				}
 			},
+            {
+                path: '/mall',
+                name: 'mall',
+                component: resolve => require(['../pages/mall/mall.vue'], resolve),
+                meta: {
+                    title: '商城',
+                    requireAuth: true,
+                    keepAlive: true
+                }
+            },
 		]
     },
   	// 拍场
@@ -82,8 +94,8 @@ export default new Router({
     {
 		path: '/goods',
 		component: parentComponent,
-		// component: resolve => require(['../pages/list/listGoods.vue'], resolve),
 		children: [
+			// 历史拍卖（拍卖专场的，不包含每日一拍的历史）
 			{
 				path: 'history',
 				name: 'history',
@@ -93,15 +105,17 @@ export default new Router({
 					requireAuth: false
 				}
 			},
+			// 每日一拍历史
 			{
-				path: 'daily',
-				name: 'daily',
+				path: 'dailyHistory',
+				name: 'dailyHistory',
 				component: resolve => require(['../pages/list/listGoods.vue'], resolve),
 				meta: {
-					title: '每日一拍历史拍卖',
+					title: '每日一拍',
 					requireAuth: false
 				}
 			},
+			// 饮用精选
 			{
 				path: 'pick',
 				name: 'pick',
@@ -110,7 +124,28 @@ export default new Router({
 					title: '饮用精选',
 					requireAuth: false
 				}
+			},
+			// 每日一拍正在热拍
+		 
+			{
+				path : 'listDaily',
+				name : 'listDaily',
+				component: resolve => require(['../pages/list/listDaily.vue'], resolve),
+				meta: {
+					title: '每日一拍',
+					requireAuth: false
+				},
+			},
+			{
+				path : 'next',
+				name : 'next',
+				component: resolve => require(['../pages/list/daily/next.vue'], resolve),
+				meta: {
+					title: '每日一拍',
+					requireAuth: false
+				},
 			}
+			 
 		]
     },
      //详情 
@@ -118,22 +153,72 @@ export default new Router({
     	path: '/detail',
     	component: parentComponent,
     	children: [
+    		// 拍场详情
 			{
 				path:'session/:seq',
 				name:'sessionDetail',
 				component: resolve => require(['../pages/detail/session.vue'], resolve),
 				meta: {
 					title: '拍场详情',
-					requireAuth: false
+					requireAuth: true
 				}
 			},
+			// 拍品详情
 			{
-				path:'good/:seq',
+				path:'good/:Sseq/:Gseq',
 				name:'goodsDetail',
 				component: resolve => require(['../pages/detail/good.vue'], resolve),
 				meta: {
 					title: '拍品详情',
-					requireAuth: false
+					requireAuth: true
+				}
+			},
+			// 拍品出价记录
+			{
+				path:'record/:Gseq',
+				name:'record',
+				component: resolve => require(['../pages/detail/record/record.vue'], resolve),
+				meta: {
+					title: '出价记录',
+					requireAuth: true
+				}
+			}
+
+    	]
+    },
+ 	// 订单
+    {
+    	path:'/order',
+    	component: parentComponent,
+    	children:[
+    		// 拍卖订单
+    		{
+    			path:'saleOrder',
+    			name:'saleOrder',
+    			component: resolve => require(['../pages/order/saleOrder.vue'], resolve),
+				meta: {
+					title: '拍卖订单',
+					requireAuth: true
+				}
+    		},
+    		// 违约订单
+    		{
+    			path:'saleBreakOrder',
+    			name:'saleBreakOrder',
+    			component: resolve => require(['../pages/order/saleBreakOrder.vue'], resolve),
+				meta: {
+					title: '违约单',
+					requireAuth: true
+				}
+    		},
+    		// 结算中心
+			{
+				path:'checkout/:Sseq',
+    			name:'checkout',
+    			component: resolve => require(['../pages/order/checkout.vue'], resolve),
+				meta: {
+					title: '结算中心',
+					requireAuth: true
 				}
 			}
     	]
@@ -148,7 +233,7 @@ export default new Router({
     			component: resolve => require(['../pages/pay/pay.vue'], resolve),
 				meta: {
 					title: '支付保证金',
-					requireAuth: false
+					requireAuth: true
 				}
     		},
     		{
@@ -157,9 +242,18 @@ export default new Router({
     			component: resolve => require(['../pages/pay/pay.vue'], resolve),
 				meta: {
 					title: '拍卖支付',
-					requireAuth: false
+					requireAuth: true
 				}
-    		}
+    		},
+    		{
+    			path:'auctionRule',
+    			name:'auctionRule',
+    			component: resolve => require(['../components/text/auctionRule.vue'], resolve),
+				meta: {
+					title: '拍卖规则',
+					requireAuth: true
+				}
+    		},
     	]
     },
     {
@@ -195,7 +289,6 @@ export default new Router({
 		    }
 		]
     },
-    
     {
 		path: '*',
 		name:'error',
@@ -205,6 +298,17 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: demo
+    },
+    {
+      path: '/demo2',
+      component: parentComponent,
+      children: [
+      	{
+      		path: '',
+	        name: 'demo2',
+	        component: demo
+      	}
+      ]
     }
     // 下面是嵌套路由、动态路由示例-------------------------------start
 /*    {

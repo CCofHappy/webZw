@@ -1,10 +1,11 @@
  
 <template>
      <yd-list theme="2" class="ydlist">
-        <yd-list-item v-for="item, key in listData" :key="key">
+        <yd-list-item v-for="item, key in listData" :key="key" :href="`/detail/good/${item.auctionSessionSeq}/${item.auctionGoodsSeq}`">
+          <!-- <router-link :to="{name:'goodsDetail',params:{Gseq: `${item.auctionGoodsSeq}`, Sseq: `${item.auctionSessionSeq}`}}"> -->
             <img slot="img" v-if="item.auctionGoodsIcon" :src="item.auctionGoodsIcon">
             <img slot="img" v-else="item.auctionGoodsIcon" src="@/assets/applogo.png">
-            <span slot="title">BRORA</span>
+            <span slot="title">{{item.auctionGoodsEName ? item.auctionGoodsEName : 'PORT ELLEN'}}</span>
             <yd-list-other slot="other">
               <span class="title">{{item.auctionGoodsName}}</span>
             </yd-list-other>
@@ -25,6 +26,7 @@
                 <span class="PriceTitle">成交价:流拍</span>
               </div>
             </yd-list-other>
+        <!-- </router-link> -->
         </yd-list-item>
     </yd-list>
 </template>
@@ -59,17 +61,15 @@
     color: #282828;
     height:0.38rem;
   }
-  .yd-list-theme2 .yd-list-item:nth-child(odd) {
-    padding-right: .1rem;
-  }
   .yd-list-other{
-    margin-top: .16rem;
+    margin-top: .1rem;
   }
   .otherStatus {
     height: .38rem;
   }
   .PriceTitle {
     color: #282828;
+    font-size: .24rem;
   }
   .priceNum{
     color: #C93B00;

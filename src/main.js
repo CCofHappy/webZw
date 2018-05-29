@@ -5,9 +5,9 @@ import router from './router'
 import store from '@/store'         
 import YDUI from 'vue-ydui'       
 import VueLazyload from 'vue-lazyload'  
+// import FastClick from 'fastclick'     //解决点击事件延迟问题
 import VueLocalStorage from 'vue-localstorage'
 import 'vue-ydui/dist/ydui.rem.css'
-import config from '@/components/config/config'
 import api from './utils/api'
 import {VeeValidate, Veeconfig} from './utils/validation.js';   //验证规则
 import VueAwesomeSwiper from 'vue-awesome-swiper'

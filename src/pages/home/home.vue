@@ -1,103 +1,105 @@
 <template>
-  <div>
-    <!-- <loading v-if="Vloading"></loading> -->
-    <div v-if="Number(this.$localStorage.get('client'))" class="searchead">
-      <yd-navbar :fixed="true">
-          <router-link to="#" slot="left">
+  <div style="padding-bottom: 1.4rem;">
+    <transition name="fade">
+      <loading v-if="Vloading"></loading>
+    </transition>
+    <div v-if="Number(this.$localStorage.get('client'))">
+      <yd-navbar :fixed="true" class="text-center">
+        <img slot="center" src="@/assets/logo-txt.png" style="width: 1.6rem;height: auto;">
+         <!--  <router-link to="#" slot="left">
             <div class="iconBox">
-              <i class="iconfont icon-Shapecopy"></i>
+              <i class="iconfont icon-Slicex10"></i>
               <span>消息</span>
             </div>
           </router-link>
           <div slot="center" class="search"><i class="iconfont icon-sousuo"></i> 快速搜索</div>
           <router-link to="#" slot="right">
               <div class="iconBox" style="margin-right:10px">
-                <i class="iconfont icon-paimaichui"></i>
+                <i class="iconfont icon-Slice8"></i>
                 <span>送拍</span>
               </div>
               <div class="iconBox">
-                <i class="iconfont icon-leimupinleifenleileibie"></i>
+                <i class="iconfont icon-Slice8"></i>
                 <span>分类</span>
               </div>
-          </router-link>
+          </router-link> -->
       </yd-navbar>
     </div>
-    <bannera :bannerData="bannerData1"></bannera>
+    <bannera class="margin-top-lg" :bannerData="bannerData1"></bannera>
      <div class="center-menus">
       <router-link to="/session/hot">
         <div class="left">
-          正在热拍
+          <img src="@/assets/menus1.png">
         </div>
       </router-link> 
       <div class="right">
         <router-link to="/session/preview">
           <div class="up">
-             预展专区
+            <img src="@/assets/menus2.png">
           </div>
         </router-link>
         <router-link to="/session/history">
           <div class="down">
-             历史专区
+            <img src="@/assets/menus3.png">
           </div>
         </router-link>
       </div>
     </div>
-    <div class="cell-box">
-      <router-link to="/session/hot">
+    <div v-if="bannerData4">
+      <!-- <router-link to="/session/hot"> -->
         <div class="box-type">
           <b class="cn">正在热拍</b>
-          <div class="en">UNDER AUCTION</div>
-          <i class="iconfont icon-youjiantou"></i>
+          <div class="en margin-top-xs">UNDER AUCTION</div>
+          <!-- <i class="iconfont icon-Slicex13"></i> -->
         </div>
-      </router-link>
-      <bannerd class="list-child padding-bottom-md" :bannerData="bannerData4" :serverTime="serverTime"></bannerd>
+      <!-- </router-link> -->
+      <bannerd class="list-child" :bannerData="bannerData4" :serverTime="serverTime"></bannerd>
     </div>
 
-    <div class="cell-box" v-if="daySale.length">
+    <div v-if="daySale.length">
       <router-link to="/session/daily">
        <div class="box-type">
         <b class="cn">每日一拍</b>
-        <div class="en">Recommended collection</div>
-        <i class="iconfont icon-youjiantou"></i>
+        <div class="en margin-top-xs">Recommended collection</div>
+        <i class="iconfont icon-Slice"></i>
        </div>
       </router-link>
       <!-- 每日一拍拍品列表 -->
       <goods :listData="daySale"></goods>
     </div>
 
-    <div class="cell-box" v-if="outSale.length">
-       <div class="lists margin-top-sm padding-top-sm padding-bottom-xs">
+    <div v-if="bannerData3.length" class="padding-top-md padding-bottom-md">
+       <div class="lists">
         <router-link to="/goods/pick">
-         <div class="text-left">
+         <div class="child">
             <b class="cntitle">饮用精选</b>
             <p class="entitle">DRINK SELECTION</p>
-            <i class="iconRight iconfont icon-youjiantou"></i>
+            <i class="iconRight iconfont icon-Slicex13"></i>
           </div>
         </router-link>
         <bannerc :bannerData="bannerData3"></bannerc>
-
       </div>
     </div>
 
 
-    <div class="cell-box" v-if="outSale.length">
-      <router-link to="/session/history">
+    <div v-if="outSale.length">
+      <!-- <router-link to="/session/history"> -->
         <div class="box-type">
           <b class="cn">历史拍卖</b>
-          <div class="en">Recommended collection</div>
-          <i class="iconfont icon-youjiantou"></i>
+          <div class="en margin-top-xs">Recommended collection</div>
+          <!-- <i class="iconfont icon-Slicex13"></i> -->
         </div>
-      </router-link>
+     <!--  </router-link> -->
         <!-- 拍场轮播 -->
       <bannerb :bannerData="bannerData2"></bannerb>
        
 
-       <div class="lists margin-top-sm padding-top-sm">
+       <div class="lists padding-top-md">
         <router-link to="/goods/history">
-          <div class="text-left">
+          <div class="child">
             <b class="cntitle">历史拍品</b>
             <p class="entitle">DRINK SELECTION</p>
-            <i class="iconRight iconfont icon-youjiantou"></i>
+            <i class="iconRight iconfont icon-Slicex13"></i>
           </div>
         </router-link>
           <!-- 历史拍品列表 -->
@@ -116,7 +118,7 @@ import bannera from '@/components/banner/banner-a.vue'
 import bannerb from '@/components/banner/banner-b.vue'
 import bannerc from '@/components/banner/banner-c.vue'
 import bannerd from '@/components/banner/banner-d.vue'
-import goods from '@/components/lists/goodsList.vue'
+import goods from '@/components/lists/Lists.vue'
 import loading from '@/components/common/loading.vue'
 export default {
   name: 'home',
@@ -130,7 +132,7 @@ export default {
     },
   data () {
     return {
-       Vloading:false,
+       Vloading:true,
        bannerData1:[],
        bannerData2:[],
        bannerData3:[],
@@ -141,13 +143,21 @@ export default {
     }
   },
   computed: {
-      
+      recruitScrollY(){
+        return this.$store.state.position.recruitScrollY;
+      }
   },
   methods: {
   
   },
+  beforeRouteLeave (to, from, next) {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    this.$store.commit('eposition',scrollTop)
+    next()
+  },
   mounted() {
     
+  
    this.Vloading = true;
    fly.all([
       this.api.getData(), 
@@ -161,18 +171,20 @@ export default {
        this.bannerData3 = getData.data.recommend2;
        this.bannerData4 = getData.data.recommendSession;
        this.daySale = getData.data.SessionRecommend1;
-       this.outSale = history.data;
+       if(history.state){
+        this.outSale = history.data;
+       }
        this.serverTime = serverTime;
        setTimeout(()=>{
          this.Vloading = false;
+         this.$nextTick(function () {
+          window.scroll(0,this.recruitScrollY)
+        });
        },500)
     }))
   },
   watch: {
-    // 如有必要再加路由监听
-    $route() {
-       
-    }
+   
   }
 }
 </script>
@@ -187,50 +199,19 @@ export default {
   border-radius: 2px;
 }
 .center-menus {
-  height: 1.6rem;
+  height: 2.65rem;
   .left,.right{
     width: 50%;
     float: left;
-    height: 1.6rem;
   }
-  
-}
-
-.box-type {
-  position: relative;
-  width: 100%;
-  height: 1.48rem;
-  padding-top: .32rem;
-  background-color:#F1F1F1;
-  text-align: center;
-  .cn {
-    font-size: 0.4rem;
-    color: #282828;
+  img {
+    width: 100%;
   }
-  .en {
-    font-size: 0.2rem;
-    color: #979797;
-    letter-spacing: 5px;
+  .left {
+    border-right: 1px solid #F1F1F1;
   }
-  .iconfont {
-    position: absolute;
-    top: .5rem;
-    right: 0.2rem;
-    font-size: 0.52rem;
-    color: #CCCCCC;
-  }
-}
-.lists {
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
-  background-color: white;
-  position: relative;
-  .iconRight {
-    position: absolute;
-    top: .4rem;
-    right: 0.2rem;
-    font-size: 0.52rem;
-    color: #CCCCCC;
+  .up {
+    border-bottom: 1px solid #F1F1F1;
   }
 }
 </style>

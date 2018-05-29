@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import {validForm} from '@/utils/index.js'
-import config from '@/components/config/config'
+import config from '@/utils/config'
 import Cookie from 'js-cookie'
 import md5 from 'js-md5'
 const MobileDetect = require('mobile-detect')  // 获取设备参数
@@ -12,8 +12,8 @@ window.md5 = md5;
 window.fly = new Fly;
 window.validForm = validForm   //全局验证方法
 window.bootRatio = 0.05;       //佣金比例
-
-fly.config.baseURL=config.wapApi+'app'
+Vue.prototype.configConst = config;
+fly.config.baseURL=config.wapApi
 // 请求拦截器-----------------------------------------------------------start
 fly.interceptors.request.use((request) => {
   request.headers["Accept"]="application/json";
@@ -30,6 +30,16 @@ fly.interceptors.request.use((request) => {
 // 返回拦截器-----------------------------------------------------------start
 fly.interceptors.response.use(
   (response, promise) => {
+    if(response.data.state == -1){
+      Cookie.remove('token')
+      Vue.prototype.$dialog.toast({
+          mes: '请登录后再操作',
+          timeout: 2000,
+          callback: () => {
+              window.location.reload();
+          }
+      });
+    }
     return promise.resolve(response.data)
   },
   (err, promise) => {
@@ -59,6 +69,9 @@ Date.prototype.Format = function(fmt) { //author: meizz
       if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 };
+
+
+// 调用方法   
 window.formtDate = function(date,type){
     if(!date) return;
     switch(type){

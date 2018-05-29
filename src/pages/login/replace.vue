@@ -80,7 +80,7 @@ export default {
           password:this.password,
           passwordAgain:this.passwordAgain
         }
-        fly.post('/person/forgetLoginPwd',postData)
+        fly.post('app/person/forgetLoginPwd',postData)
         .then((res) => {
           if(res.state ==1){
             this.$dialog.toast({ mes: '修改成功，2秒后跳转到登录页面'});

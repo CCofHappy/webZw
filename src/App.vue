@@ -7,28 +7,32 @@
 </template>
 
 <script>
-	export default {
-		name: 'app',
-		data() {
-			return {
-				transitionName: 'slide-left',
-			}
-		},
-		methods: {},
-		mounted() {
-		 
-		},
-		//监听路由的路径，可以通过不同的路径去选择不同的切换效果  
-		watch: {
-			$route (to, from) {
-				if(to.path == '/') {
-					this.transitionName = 'slide-right';
-				} else {
-					this.transitionName = 'slide-left';
-				}
-			}
+import { mapState, mapMutations, mapActions } from 'vuex'    //vuex状态管理器，主要使用store/index.js
+export default {
+	name: 'app',
+	data() {
+		return {
+			 
 		}
-	}
+	},
+	computed:mapState({
+		transitionName:state => state.transition.transitionName
+	}),
+	methods: {
+		...mapMutations([
+	      'CHANGE_TRANSITION',  
+    	]),
+	},
+	mounted() {
+	 
+	},
+	//监听路由的路径，可以通过不同的路径去选择不同的切换效果  
+	watch: {
+      $route (to, from) {
+         this.CHANGE_TRANSITION(to.path)
+      }
+    }
+}
 </script>
 <style lang="less">
 	#app, #app input, #app button{
@@ -36,25 +40,5 @@
 	}
 	.child-view{
 		/*text-align: center; */
-	}
-	
-	.bgrich {
-		filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
-		-moz-background-size:100% 100%;  
-	    background-size:100% 100%;  
-	}
-	.center-menus .left {
-	     /*background: url('./assets/applogo.png');*/
-		.bgrich;
-	}
-	.center-menus .right .up {
-		 /*background: url('./assets/applogo.png');*/
-		.bgrich;
-		height: .8rem;
-	}
-	.center-menus .right .down {
-		 /*background: url('./assets/applogo.png');*/
-		.bgrich;
-		height: .8rem;
 	}
 </style>

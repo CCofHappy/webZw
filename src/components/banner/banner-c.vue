@@ -1,9 +1,10 @@
-<!-- 历史拍卖轮播类型 -->
+<!-- 饮用精选轮播类型 -->
  <template>
      <swiper :options="swiperOption" class="banner3">
         <swiper-slide v-for="item, key in bannerData" :key="key">
-          <img v-if="item.auctionSessionIcon" :src="item.auctionSessionIcon">
-          <img v-else="item.auctionSessionIcon" src="@/assets/default/default.png">
+         <router-link :to="{name:'goodsDetail',params:{Gseq: `${item.auctionGoodsSeq}`, Sseq: `${item.auctionSessionSeq}`}}">
+          <!-- <a :href="`/detail/good/${item.auctionSessionSeq}/${item.auctionGoodsSeq}`"> -->
+          <img v-if="item.auctionGoodsIcon" :src="item.auctionGoodsIcon">
           <div class="text-left btext">
             <b>BALBLAIR</b>
             <div class="textfir">{{item.auctionGoodsName}}</div>
@@ -23,6 +24,8 @@
               <span class="PriceTitle-xs">成交价:流拍</span>
             </div>
           </div>
+          <!-- </a> -->
+          </router-link>
         </swiper-slide>
       </swiper>
 </template>

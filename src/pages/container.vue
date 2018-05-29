@@ -1,12 +1,13 @@
 <template>
   <div class="rich-view">
-    <router-view></router-view>
+    <transition :name="transitionName"  mode="out-in">
+      <router-view class="rich-view"></router-view>
+    </transition>
     <Tabbar :fixed="true"></Tabbar>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import Tabbar from '@/components/common/Tabbar.vue'
 export default {
   name: 'container',
@@ -19,17 +20,24 @@ export default {
     }
   },
   computed: {
- 
+    // 计算属性，获取vuex中的切换效果状态
+    transitionName () {
+      return this.$store.state.transition.transitionName
+    }
+
   },
   methods: {
-   
-  },
-  mounted() {
   
   },
-  watch: {
-   
-  }
+  mounted() {
+ 
+  },
+  //监听路由的路径，可以通过不同的路径去选择不同的切换效果  
+    watch: {
+      $route (to, from) {
+        
+      }
+    }
 }
 </script>
 

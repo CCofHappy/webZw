@@ -60,3 +60,4 @@ export function formatIndexList (list) {
   }
   return result
 }
+ 

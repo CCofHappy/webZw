@@ -1,12 +1,13 @@
+<!-- 拍场详情 -->
 <template>
-  <div>
+  <div class="bggray">
     <titleHead :fixed="true"></titleHead>
-    
+
       <img class="detailImg" :src="session.auctionSessionIcon">
-    <div class="detail-box margin-top-xs list-child">
+    <div class="detail-box bgwhite list-child">
       <countdowna v-if="session.state <=3" :startDate="session.auctionSessionStart" :serverTime="serverTime" :endDate="session.auctionSessionEnd" :dateType="1"></countdowna>
       <!-- 拍卖结束后直接显示结束时间即可 -->
-     
+
      <yd-flexbox class="fs10">
         <yd-flexbox-item  class="text-left fgray">
           拍品：<span class="fred">{{session.auctionCount}}件</span>
@@ -18,33 +19,53 @@
           围观：<span class="fred">{{session.surroundCatchCount}}次</span>
         </yd-flexbox-item>
      </yd-flexbox>
-     <div class="text-left">
-       <article v-if="session.auctionSessionDesc">
-         <h1 class="fs16 margin-top-sm">专场介绍</h1>
-         <p class="margin-top-sm fblack">
+     <div  style="padding-bottom: .3rem;">
+       <article class="text-left margin-top-md" v-if="session.auctionSessionDesc">
+         <h1 class="fs16">专场介绍</h1>
+         <p class="margin-top-sm" style="color:#5F5F5F;">
           {{ session.auctionSessionDesc }}
          </p>
        </article>
        <span style="display:inline-block" v-if="session.state > 3" class="gray fs10 margin-top-sm">结束时间：{{formtDate(session.auctionSessionEnd,3)}}</span>
      </div>
     </div>
-    <goodslist></goodslist>
+    <!-- 拍场下的拍品列表 -->
+    <yd-infinitescroll :callback="loadListDown" ref="ls" class="scroll-a">
+        <yd-list theme="4" slot="list">
+          <itemscroll v-for="(item,key) in list" :key="key" class="list-child" :item="item" :serverTime="serverTime"></itemscroll>
+        </yd-list>
+        <span slot="doneTip">没有更多内容~~</span>
+         <!-- 加载中提示，不指定，将显示默认加载中图标 -->
+        <div slot="loadingTip">
+          <scrolLoading></scrolLoading>
+        </div>
+    </yd-infinitescroll>
+    <!-- 出价tab选项卡 -->
+    <bidden></bidden>
+    <!-- 私洽弹窗 -->
+    <negotiate></negotiate>
   </div>
 </template>
 
 <script>
 import titleHead from '@/components/common/Title/Thead.vue'
-import countdowna from '@/components/countdown/countdown-a.vue'    
-import goodslist from '@/components/lists/scrolGoodslList.vue'
+import countdowna from '@/components/countdown/countdown-a.vue'
+import itemscroll from '@/components/lists/Itemscroll.vue'
+import scrolLoading from '@/components/common/scrolLoading'
+import bidden from '@/components/common/bidden'
+import negotiate from '@/components/common/negotiate'
 export default {
   components: {
         titleHead,
         countdowna,
-        goodslist
+        itemscroll,
+        scrolLoading,
+        bidden,
+        negotiate
     },
   data () {
     return {
-      serverTime:null,
+        list:[],
         postData:{
           page:1,
           rows:10,
@@ -53,42 +74,48 @@ export default {
           term:0,
         },
         // 拍场详情
-        session:{
-
-        },
-        // 拍场下的列表数据
-        showAuction:[]
+        session:{},
     }
   },
   computed: {
-      
+      serverTime () {
+        return this.$store.state.server.serverTime
+      }
   },
   methods: {
-    // 更新服务器时间
-      upTime() {
-         this.api.getServerTime()
-         .then((res) => {
-          this.serverTime = res;
-         })
-      },
-  	 updata(callback){
-        this.upTime()
+     // 滚动加载
+      loadListDown() {
         this.api.sessionDetail(this.postData)
        .then((res) => {
-          this.session = res.data.session;
-          this.showAuction = res.data.showAuction;
-          if( typeof callback == 'function'){
-            callback(this.showAuction);
+          if(res.state == 1){
+              this.session = res.data.session;
+              const _list = res.data.showAuction.dataList;
+              this.$store.dispatch('getServerTime')
+              this.list = [...this.list, ..._list];
+              // 当最后一页的数据少于一页的数据或者页数等于后台返回的总页数时，就是全部加载完毕
+              if (_list.length < this.postData.rows || this.postData.page >= res.data.pageCount) {
+                  // 所有数据加载完毕
+                  this.$refs.ls.$emit('ydui.infinitescroll.loadedDone');
+                  return;
+              }
+              this.$refs.ls.$emit('ydui.infinitescroll.finishLoad');
+              this.postData.page++;
           }
+
        })
-     }
+
+
+      },
   },
   mounted() {
-   
+   this.$nextTick(function(){
+        this.loadListDown()
+    })
+   this.$store.dispatch('getServerTime')
   },
   watch: {
     $route() {
-       
+
     }
   }
 }
@@ -100,6 +127,8 @@ export default {
   height: 4rem;
 }
 .detail-box {
-  padding: 0 .2rem .4rem;
+  position: relative;
+  top: -0.04rem;
+  padding: .3rem .2rem;
 }
 </style>

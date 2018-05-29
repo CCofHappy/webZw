@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bgwhite">
     <div class="logoImg">
         <img src="@/assets/logo-3.png" style="margin-top:1rem;">
     </div>
@@ -22,7 +22,7 @@
         <router-link class="pull-right" :to="{ name: 'register'}">注册</router-link>
       </div>
       <div class="goBack">
-        <i class="iconfont icon-cuowu" @click="$router.push({name:'home'})"></i>
+        <i class="iconfont icon-Slice3" @click="$router.push({name:'home'})"></i>
       </div>
     </div>
     
@@ -46,13 +46,13 @@ export default {
   },
   methods: {
     login(){
-        fly.post('/person/login',{'customerLogin':this.customerLogin,'customerPwd':md5(this.customerPwd)})
+        fly.post('app/person/login',{'customerLogin':this.customerLogin,'customerPwd':md5(this.customerPwd)})
         .then(res => {
           if(res.state) {
              Cookie.set('token',res.data.etoken,{expires:1});     //把token存到cookie
              Cookie.set('userSeq',res.data.customerSeq,{expires:1});     //把用户seq存到cookie
              let path = this.$route.query.redirect ? this.$route.query.redirect : '/home'
-             this.$router.push(path)  //登录成功后跳转到登录前的页面
+             this.$router.replace(path)  //登录成功后跳转到登录前的页面
              this.$dialog.toast({ mes:'登录成功'});
           }else {
             this.$dialog.toast({ mes:res.message });

@@ -1,19 +1,57 @@
-// 1rem = 50px;    设计图纸375px 
-@import url('//at.alicdn.com/t/font_653038_8q65jkx23keghkt9.css');
+// 1rem = 50px;    设计图纸375px
+@import url('//at.alicdn.com/t/font_674763_j2nb714istyy14i.css');
 .iconfont {
   font-size: 0.32rem;
 }
 @charset "utf-8";
 // 公共参数
-@dark-red: #C72202; 
-@a-gray: #b9b9b9;      
-@form-width: 80%; 
+@dark-red: #C72202;
+@a-gray: #b9b9b9;
+@form-width: 80%;
 @logo-width:2.8rem;
 body {
   background: #FFFFFF;
+
 }
+// body, html {
+//     min-height: 100%;
+//     height: auto !important;
+// }
+ .skyf{
+  font-family: PingFangSC;
+ }
 .bggray {
   background-color: #F1F1F1 !important;
+}
+.bgdgray {
+  background-color: #969696 !important;
+}
+.bgwhite {
+  background-color: #FFFFFF !important;
+}
+.bgred {
+  background-color: #C83A03 !important;
+}
+// ydui css重置
+ // 表单cell
+.yd-cell:after,.yd-cell-item:not(:last-child):after {
+    margin-left: .24rem;
+    width: -moz-calc(100% - .48rem);
+    width: -webkit-calc(100% - .48rem);
+    width: calc(100% - .48rem);
+    border-bottom: 1px solid #d9d9d9;
+}
+
+// 满屏设置
+.rich-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  transition: all .2s cubic-bezier(.55, 0, .1, 1);
+  -webkit-overflow-scrolling: touch;
+  background-color: white;
 }
 .text-center{text-align:center}
 .text-left{text-align:left}
@@ -21,49 +59,53 @@ body {
 .pull-left{float:left}
 .pull-right{float:right}
 .clearfix:after{clear:both;display:block;visibility:hidden;overflow:hidden;height:0;content:"clear"}
-.margin-top-lg{margin-top:1rem}
-.margin-top-md{margin-top:.4rem}
-.margin-top-sm{margin-top:.2rem}
-.margin-top-xs{margin-top:.1rem}
-.margin-left-lg{margin-left:1rem}
-.margin-left-md{margin-left:.4rem}
-.margin-left-sm{margin-left:.2rem}
-.margin-left-xs{margin-left:.1rem}
-.margin-right-lg{margin-right:1rem}
-.margin-right-md{margin-right:.4rem}
-.margin-right-sm{margin-right:.2rem}
-.margin-right-xs{margin-right:.1rem}
-.margin-bottom-lg{margin-bottom:1rem}
-.margin-bottom-md{margin-bottom:.4rem}
-.margin-bottom-sm{margin-bottom:.2rem}
-.margin-bottom-xs{margin-bottom:.1rem}
-.padding-xs {padding: 0.1rem;}
-.padding-sm {padding: 0.2rem;}
-.padding-md {padding: 0.4rem;}
-.padding-lg {padding: 1rem;}
-.padding-0{padding: 0;}
-.padding-left-0{padding-left: 0;}
-.padding-right-0{padding-right: 0;}
-.padding-top-0{padding-top: 0;}
-.padding-bottom-0{padding-bottom: 0;}
-.padding-top-lg{padding-top:1rem}
-.padding-top-md{padding-top:.4rem}
-.padding-top-sm{padding-top:.2rem}
-.padding-top-xs{padding-top:.1rem}
-.padding-left-lg{padding-left:1rem}
-.padding-left-md{padding-left:.4rem}
-.padding-left-sm{padding-left:.2rem}
-.padding-left-xs{padding-left:.1rem}
-.padding-right-lg{padding-right:1rem}
-.padding-right-md{padding-right:.4rem}
-.padding-right-sm{padding-right:.2rem}
-.padding-right-xs{padding-right:.1rem}
-.padding-bottom-lg{padding-bottom:1rem}
-.padding-bottom-md{padding-bottom:.4rem}
-.padding-bottom-sm{padding-bottom:.2rem}
-.padding-bottom-xs{padding-bottom:.1rem}
+.margin-top-lg{margin-top:1rem !important}
+.margin-top-md{margin-top:.4rem !important}
+.margin-top-sm{margin-top:.2rem !important}
+.margin-top-xs{margin-top:.1rem !important}
+.margin-left-lg{margin-left:1rem !important}
+.margin-left-md{margin-left:.4rem !important}
+.margin-left-sm{margin-left:.2rem !important}
+.margin-left-xs{margin-left:.1rem !important}
+.margin-right-lg{margin-right:1rem !important}
+.margin-right-md{margin-right:.4rem !important}
+.margin-right-sm{margin-right:.2rem !important}
+.margin-right-xs{margin-right:.1rem !important}
+.margin-bottom-lg{margin-bottom:1rem !important}
+.margin-bottom-md{margin-bottom:.4rem !important}
+.margin-bottom-sm{margin-bottom:.2rem !important}
+.margin-bottom-xs{margin-bottom:.1rem !important}
+.padding-xxs {padding: 0.04rem !important}
+.padding-xs {padding: 0.1rem !important}
+.padding-sm {padding: 0.2rem !important}
+.padding-md {padding: 0.4rem !important}
+.padding-lg {padding: 1rem !important}
+.padding-0{padding: 0 !important}
+.padding-left-0{padding-left: 0 !important}
+.padding-right-0{padding-right: 0 !important}
+.padding-top-0{padding-top: 0 !important}
+.padding-bottom-0{padding-bottom: 0 !important}
+.padding-top-lg{padding-top:1rem !important}
+.padding-top-md{padding-top:.4rem !important}
+.padding-top-sm{padding-top:.2rem !important}
+.padding-top-xs{padding-top:.1rem !important}
+.padding-left-lg{padding-left:1rem !important}
+.padding-left-md{padding-left:.4rem !important}
+.padding-left-sm{padding-left:.2rem !important}
+.padding-left-xs{padding-left:.1rem !important}
+.padding-right-lg{padding-right:1rem !important}
+.padding-right-md{padding-right:.4rem !important}
+.padding-right-sm{padding-right:.2rem !important}
+.padding-right-xs{padding-right:.1rem !important}
+.padding-bottom-lg{padding-bottom:1rem !important}
+.padding-bottom-md{padding-bottom:.4rem !important}
+.padding-bottom-sm{padding-bottom:.2rem !important}
+.padding-bottom-xs{padding-bottom:.1rem !important}
+.border-none {
+  border:none !important;
+}
 /* ============================================================
-   flex：定义布局为盒模型    
+   flex：定义布局为盒模型
    flex-v：盒模型垂直布局
    flex-1：子元素占据剩余的空间
    flex-align-center：子元素垂直居中
@@ -77,24 +119,27 @@ body {
 .flex-pack-center{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
 .flex-pack-justify{-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}
 
-// 纯布局，需要其他样式请另外添加样式名，如带边框的布局，cl-box-border，斑马线cl-box-crossing
+// 纯布局，需要其他样式请另外添加样式名，如带边框的布局，cl-box-border，斑马线cl-box-crossing，.cl-box-bottom只要下边线
 .cl-box{display:table;width:100%}
 .cl-row{display:table-row;vertical-align:middle;word-wrap:break-word;word-break:break-all;}
 .cl-row .cl-td{display:table-cell;vertical-align:middle}
+.cl-box-padding .cl-row .cl-td{display:table-cell;vertical-align:middle;padding: .3rem;}
 .cl-box-border {background-color: #FFFFFF;border:1px solid #EBEBEB;border-radius: 4px;}
-.cl-box-border .cl-td{position: relative; padding: .2rem;}
-.cl-box-border .cl-td:first-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;left: .2rem;}
-.cl-box-border .cl-td:last-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;right: .2rem;}
+.cl-box-border .cl-td, .cl-box-bottom .cl-td{position: relative; padding: .3rem;}
+.cl-box-border .cl-td:first-child:after, .cl-box-bottom .cl-td:first-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;left: .2rem;}
+.cl-box-border .cl-td:last-child:after, .cl-box-bottom .cl-td:last-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;right: .2rem;}
+.cl-box-border .cl-row:last-child .cl-td:after{height: 0;}
 
 // .cl-row:nth-child(odd){background-color:#F5F5F5}
 // .cl-row:last-child .cl-td{border-bottom:1px solid #E3E3E3}
 // .cl-row .cl-td:first-child{width:34%;border-left:1px solid #E3E3E3;border-right:1px solid #E3E3E3}
 // .cl-row .cl-td:last-child{width:66%;border-right:1px solid #E3E3E3}
 
-// 底部带.2rem的灰间隔
+// 底部带.2rem的灰间隔，上下0.4rem
 .list-child {
     position: relative;
-    padding-bottom: .2rem;
+    padding-top: 0.4rem;
+    padding-bottom: .6rem;
 }
 .list-child:after {
     position: absolute;
@@ -106,13 +151,19 @@ body {
     left:0;
     z-index: 9;
 }
+// 透明度
+.opacity09 {
+  filter:alpha(opacity=90);
+  -moz-opacity:0.9;
+  opacity:0.9;
+}
 .opacity05 {
-  filter:alpha(opacity=50); 
-  -moz-opacity:0.5; 
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
   opacity:0.5;
 }
 .opacity1 {
-  filter:alpha(opacity=100); 
+  filter:alpha(opacity=100);
   -moz-opacity:1;
   opacity:1;
 }
@@ -135,12 +186,18 @@ body {
 .fs20 {
   font-size: .4rem;
 }
+.fw600{
+  font-weight: 600;
+}
 /*灰色*/
 .gray {
   color: #B5B5B5;
 }
 .fgray {
   color: #B9B9B9;
+}
+.red {
+  color: #C93F09;
 }
 /*浅红*/
 .fred {
@@ -154,8 +211,11 @@ body {
 .ablue {
   color:#3F95FA;
 }
+.white {
+  color: #FFFFFF;
+}
 // 文字处理
-// 超出宽度显示省略号
+// 超出宽度显示省略号(如果没有效果，要考虑下作用元素上的宽度问题)
 .textfir {
   display:block;
   white-space:nowrap;
@@ -165,6 +225,11 @@ body {
 //强制不换行
 .nowrap {
   white-space:nowrap;
+}
+// 自动换行
+.breakWord {
+  white-space: normal;
+  word-wrap: break-word
 }
 // 最多显示两行，超出显示省略号
 .text2row{
@@ -179,7 +244,7 @@ body {
 .text-top{
   vertical-align: text-top;
 }
-// 字体居顶
+// 字体居中
 .text-middle{
   vertical-align: middle;
 }
@@ -208,7 +273,7 @@ body {
   position: relative;
   font-size: .2rem;
   &:after {
-    padding: 1px 3px;
+    padding: 0 1px;
     display: inline-block;
   }
 }
@@ -221,26 +286,56 @@ body {
 .bhicon:after{
   content: '编';
   color: #6C6C6C;
-  border: 2px solid #D7D7D7;
+  border: 1px solid #D7D7D7;
 }
 .qpicon:after{
   content: '起';
   color: #6C6C6C;
-  border: 2px solid #D7D7D7;
+  border: 1px solid #D7D7D7;
 }
 .jjicon:after{
   content: '加';
   color: #6C6C6C;
-  border: 2px solid #D7D7D7;
+  border: 1px solid #D7D7D7;
 }
 .ygicon:after{
   content: '预';
   color: #6C6C6C;
-  border: 2px solid #D7D7D7;
+  border: 1px solid #D7D7D7;
 }
+// 底部固定块
+.footFixed {
+    border: 1px solid #F4F4F4;
+    height: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    background: #FFFFFF;
+}
+// 输入框
+.sky-inp {
+  background-color: #F2F2F2;
+  border:none;
+  padding: 0.1rem;
+  display: inline-block;
 
-
-
+}
+// 开关
+.skySwitch {
+  height: 26px;
+  display: inline-block;
+}
+.skySwitch:before {
+    width: 0px;
+}
+.skySwitch:after, .skySwitch:before {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: 4px;
+  left: 8px;
+}
 // 按钮
 .yd-btn.sky-btn {
   border-radius: 0;
@@ -254,13 +349,44 @@ body {
   padding: 0 .24rem;
 }
 
+// 按钮  灰字灰边（查看物流按钮）
+.yd-btn.sky-btn-gray {
+  border: 1px solid #CACACA;
+  color: #CACACA;
+  padding: 0 .24rem;
+}
 
+// 按钮  浅红字浅红边（确认收货按钮）
+.yd-btn.sky-btn-fred {
+  border: 1px solid #D38759;
+  color: #D38759;
+  padding: 0 .24rem;
+}
+
+.yd-btn.sky-btn-big {
+  height: .8rem;
+  width: 6rem;
+  margin: 0 auto;
+  display: block;
+}
+.yd-btn.sky-btn-md {
+  height: .8rem;
+  width: 5rem;
+  margin: 0 auto;
+  display: block;
+}
+.yd-btn.sky-btn-richmd {
+  height: 1rem;
+  width: 3rem;
+  margin: 0 auto;
+  display: block;
+}
 // 常用标题样式(拍场中文)
 .cntitle {
   font-size: 0.36rem;
   color: #282828;
-  margin-bottom: .16rem;
-  margin-top: .16rem;
+  margin-bottom: .2rem;
+  font-weight: 500;
 }
 // 常用标题样式(拍品中文)
 .cnGoodsName {
@@ -272,8 +398,7 @@ body {
 .entitle {
   font-size: 0.28rem;
   color: #282828;
-  margin-bottom: .16rem;
-  margin-top: .16rem;
+  margin-bottom: .2rem;
 }
 // 常用标题样式(拍品英文)
 .enGoodsName {
@@ -298,12 +423,36 @@ opacity: 0;
 transform: translate(-30px, 0);
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity 0.1s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
+/*动画效果*/  
+@-webkit-keyframes fadeIn {  
+    0% {  
+    opacity: 0; /*初始状态 透明度为0*/  
+    }  
+    20%{  
+        opacity: .2;  
+    }  
+    50% {  
+        opacity: .5; /*中间状态 透明度为0.5*/  
+    }  
+    70%{  
+        opacity: .7;  
+    }  
+    100% {  
+        opacity: 1; /*结尾状态 透明度为1*/  
+    }  
+}  
+.fadeIn05s {
+    /*调用动画效果*/  
+  -webkit-animation-name: fadeIn; /*动画名称*/  
+  -webkit-animation-duration: .5s; /*动画持续时间*/  
+  -webkit-animation-iteration-count: 1; /*动画次数*/  
+  -webkit-animation-delay: 0s; /*延迟时间*/  
+}
 
 /*价格    ￥1300*/
 .priceNum{
@@ -330,17 +479,7 @@ transform: translate(-30px, 0);
   color: #282828;
   font-size: 0.20rem;
 }
-// 满屏设置
-.rich-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transition: all .2s cubic-bezier(.55, 0, .1, 1);
-  -webkit-overflow-scrolling: touch;
-  background-color: white;
-}
+
 
 
 // login模块（注册，登录，重置密码）
@@ -353,6 +492,7 @@ transform: translate(-30px, 0);
  }
  .cellForm {
     width: @form-width;
+    min-height: 6rem;
     margin: .4rem auto;
     padding-bottom: 0.2rem;
     .yd-btn-block {
@@ -373,9 +513,9 @@ transform: translate(-30px, 0);
       }
     }
  }
- 
 
- 
+
+
  // 轮播图样式
  // type=1（首页轮播）
 .banner1 {
@@ -395,8 +535,6 @@ transform: translate(-30px, 0);
 }
 /*type=2(历史拍卖场轮播)*/
 .banner2 {
-  padding-bottom: .4rem;
-  // background-color: white;
   .swiper-slide {
     padding-left: 0.2rem;
     width: 80%;
@@ -411,7 +549,6 @@ transform: translate(-30px, 0);
 .banner3 {
   background-color: white;
   .swiper-slide {
-    padding-bottom: .2rem;
     img {
       width: 100%;
       height: 2.6rem;
@@ -425,7 +562,7 @@ transform: translate(-30px, 0);
     position: initial;
   }
    .swiper-pagination {
-     top: 0.8rem;
+     top: 1rem;
      left: auto;
      width: auto;
      right: 0.2rem;
@@ -454,6 +591,20 @@ transform: translate(-30px, 0);
     border: none;
   }
 }
+// 详情页轮播
+.banner5 {
+  position: relative;
+  .swiper-pagination-fraction {
+    bottom: 1rem;
+    text-align: right;
+    padding-right: .4rem;
+    color: #979797;
+    .swiper-pagination-current {
+      color: #282828;
+      .fs18;
+    }
+  }
+}
 // 首页搜索头部
 .searchead {
   height: 1rem;
@@ -474,6 +625,52 @@ transform: translate(-30px, 0);
   }
 }
 
+
+// 拍场大标题类
+.box-type {
+  position: relative;
+  width: 100%;
+  height: 1.48rem;
+  padding-top: .32rem;
+  background-color:#F1F1F1;
+  text-align: center;
+  .cn {
+    font-size: 0.4rem;
+    color: #282828;
+  }
+  .en {
+    font-size: 0.2rem;
+    color: #979797;
+    letter-spacing: 5px;
+  }
+  .iconfont {
+    position: absolute;
+    top: .6rem;
+    right: 0.2rem;
+    font-weight: 100;
+    color: #CCCCCC;
+  }
+}
+// 列表标题（首页两列的）
+.lists {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  .child {
+    text-align: left;
+    position: relative;
+  }
+  .iconRight {
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    font-weight: 100;
+    color: #CCCCCC;
+  }
+}
+
+
+
+
 /*发送验证码*/
 .sendCode {
   border:none;
@@ -490,6 +687,10 @@ transform: translate(-30px, 0);
   .yd-list-item:nth-child(2n) {
     padding-left: .1rem;
   }
+  .yd-list-item {
+    padding-top: 0;
+    padding-bottom: 0.4rem;
+  }
 }
 
 // 列表（拍品）
@@ -504,6 +705,17 @@ transform: translate(-30px, 0);
    }
  }
 }
+// 领先，出局，无效
+.imgIcon {
+  .iconImg {
+    position: absolute;
+    top: .6rem;
+    left: -.2rem;
+    width: 1.1rem;
+    height: 0.56rem;
+    background: none;
+  }
+}
 // 无限加载
 .scroll-a {
   .yd-list-theme4 {
@@ -511,7 +723,7 @@ transform: translate(-30px, 0);
   }
   .yd-list-theme4 .yd-list-item {
       height: auto;
-      padding: .4rem 0 .2rem;
+      padding: 0;
   }
   .yd-list-theme4 .yd-list-item .yd-list-mes {
       padding-left: .4rem;
@@ -519,6 +731,7 @@ transform: translate(-30px, 0);
   .yd-list-theme4 .yd-list-item .yd-list-img {
       width:2.8rem;
       padding: 0 .2rem;
+      position: relative;
   }
   .yd-list-img {
       max-height: 3.2rem;
@@ -528,8 +741,89 @@ transform: translate(-30px, 0);
         margin-top: auto;
       }
   }
+  .sqBtn {
+    position: absolute;
+    bottom: .2rem;
+  }
 }
+.yd-list-donetip {
+    background: #F1F1F1;
+  }
+// 弹出框
+.yd-confirm-hd, .yd-confirm-bd{
+  text-align: center;
+}
+// 出价窗口
+.biddenTab{
+  .yd-tab-nav-item>a {
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #F8F8F8;
+    .fs16;
+    .gray;
+  }
+  .yd-tab-active a {
+    color: #272727;
+    .fs18;
+  }
+  .yd-tab-nav:after,.yd-tab-nav-item:not(:last-child):after {
+    border:none;
+  }
+  .yd-tab-active:before {
+    display: none;
+  }
+  .biddenText {
+    background: #F7F7F7;
+    height: 1.8rem;
+    color: #979797;
+    .fs14;
+    img {
+      height: 0.6rem;
+      width: 0.6rem;
+      display: inline-block;
+      margin-top: 0.15rem;
+      .pull-left;
+    }
+    .tr {
+      padding: 0 0.3rem;
+      height: 0.9rem;
+      line-height: 0.9rem;
+    }
+  }
+  // 数字加减
+  .yd-spinner {
+    position: relative;
+    height: 3.2rem !important;
+    width: 100% !important;
+    border:none;
+    input {
+      font-size: 0.72rem;
+      position: relative;
+      z-index: -1;
 
+    }
+    a {
+      background: none;
+      &:after {
+        color: #CC723C;
+        font-size: 0.6rem;
+        font-weight: 200;
+      };
+    }
+  }
+  .xtext {
+    position: absolute;
+    top: 2.5rem;
+    width: 100%;
+    text-align: center;
+    color: #979797;
+  }
+  .sky-btn {
+    width: 100%;
+    height: 1rem;
+    .fs16;
+  }
+}
 
 // 支付
 .payTypeImg {
@@ -538,7 +832,109 @@ transform: translate(-30px, 0);
 }
 
 
+// 表单布局区域（结算中心）
+.sky-box-cell {
+  padding: 0.2rem;
+  .yd-cell {
+    border-radius: 5px;
 
+  }
+  .yd-cell:after {
+    width: 100%;
+    margin-left: 0;
+  }
+  // 用于solt百分百布局，详细参考结算页面
+  .widthRich {
+    .yd-cell-left {
+      width: 100%;
+    }
+    .position {
+      position: relative;
+      width: 100%;
+      padding: .2rem .6rem .2rem 0;
+      i{
+          position: absolute;
+          right: 0;
+          top: 42%;
+          .gray;
+      }
+      .leftImg {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+      }
+      .rightText{
+        position: relative;
+        display: inline-block;
+        font-size: 0.24rem;
+        top: -.1rem;
+      } 
+    }
+  }
+}
+
+
+// 弹窗（中间弹出）
+
+.padding-sm {
+  .yd-cell {
+    padding: .2rem;
+  }
+}
+.yd-popup-content {
+  overflow-y: visible;
+}
+.itemTitle {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: .36rem;
+  padding-top: .4rem;
+  padding-bottom: .2rem;
+}
+.closeIcon {
+position: absolute;
+top: -.2rem;
+right: -.2rem;
+z-index: 10;
+font-size: .4rem;
+&:after {
+  content: ' ';
+  width:.3rem;
+  height: .3rem;
+  background:#FFFFFF;
+  position: absolute;
+  top: .1rem;
+  left: .05rem;
+  z-index: -1;
+  border-radius: 100%;
+};
+}
+
+
+
+.headFixed {
+ .yd-tab-box {
+  position: fixed;
+  top: 1rem;
+  z-index: 999;
+  width: 100%;
+ }
+ .yd-tab-panel {
+  margin-top: 2rem;
+ }
+}
+
+
+.inputBox {
+  margin-left: -0.3rem;
+  color: #C83A03;
+}
+.inputBox .yd-input, .inputBox .yd-input>input{
+  width: 2rem;
+  font-size: 0.34rem;
+  color: #C83A03;
+}
 @media screen and (min-width: 1024px) {
     .scroll {
      .yd-list-theme4 .yd-list-item .yd-list-title {

@@ -1,3 +1,4 @@
+<!-- 首页头部轮播 -->
 <template>
      <swiper :options="swiperOption" class="banner1">
         <swiper-slide v-for="item, key in bannerData" :key="key">

@@ -1,4 +1,4 @@
-<!-- 历史拍卖轮播类型 -->
+<!-- 历史拍卖拍场轮播类型 -->
  <template>
      <swiper :options="swiperOption" class="list-child banner2">
         <swiper-slide v-for="item, key in bannerData" :key="key">
