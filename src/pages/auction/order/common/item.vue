@@ -48,7 +48,7 @@ tab有父组件传进来的
             剩余 <yd-countdown :time="166666" timetype="second"></yd-countdown>
             </div>
             <div class="text-right" v-if="tab == 1 || tab == 2">
-              <yd-button class="sky-btn sky-btn-gray" type="hollow">查看物流</yd-button>
+              <yd-button class="sky-btn sky-btn-gray" type="hollow" @click.native="Inquiry(item.orderSeq)">查看物流</yd-button>
               <yd-button class="sky-btn sky-btn-fred"  v-if="item.state == 2" type="hollow">确认收货</yd-button>
             </div>
           </div>
@@ -74,7 +74,14 @@ export default {
       
   },
   methods: {
-   
+   Inquiry(Oseq){
+   	this.$router.push({
+   		name: 'logistics',
+   		params:{
+   			'Oseq':Oseq
+   		}
+   	})
+   }
   },
   mounted() {
   

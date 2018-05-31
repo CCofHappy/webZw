@@ -4,6 +4,12 @@
       <router-link to="/order/saleOrder">
         <div>拍卖订单</div>
       </router-link>
+      <router-link :to="{name: 'mySale'}">
+        <div>我的竞拍</div>
+      </router-link>
+      <router-link :to="{name: 'addressList'}">
+        <div>收货地址</div>
+      </router-link>
   </div>
 </template>
 

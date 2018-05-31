@@ -27,18 +27,18 @@
     </div>
     <bannera class="margin-top-lg" :bannerData="bannerData1"></bannera>
      <div class="center-menus">
-      <router-link to="/session/hot">
+      <router-link :to="{name:'hotSession'}">
         <div class="left">
           <img src="@/assets/menus1.png">
         </div>
       </router-link> 
       <div class="right">
-        <router-link to="/session/preview">
+        <router-link :to="{name:'previewSession'}">
           <div class="up">
             <img src="@/assets/menus2.png">
           </div>
         </router-link>
-        <router-link to="/session/history">
+        <router-link :to="{name:'historySession'}">
           <div class="down">
             <img src="@/assets/menus3.png">
           </div>
@@ -57,7 +57,7 @@
     </div>
 
     <div v-if="daySale.length">
-      <router-link to="/session/daily">
+      <router-link :to="{name: 'dailySession'}">
        <div class="box-type">
         <b class="cn">每日一拍</b>
         <div class="en margin-top-xs">Recommended collection</div>
@@ -70,7 +70,7 @@
 
     <div v-if="bannerData3.length" class="padding-top-md padding-bottom-md">
        <div class="lists">
-        <router-link to="/goods/pick">
+        <router-link :to="{name: 'pick'}">
          <div class="child">
             <b class="cntitle">饮用精选</b>
             <p class="entitle">DRINK SELECTION</p>
@@ -95,7 +95,7 @@
        
 
        <div class="lists padding-top-md">
-        <router-link to="/goods/history">
+        <router-link :to="{name:'history'}">
           <div class="child">
             <b class="cntitle">历史拍品</b>
             <p class="entitle">DRINK SELECTION</p>

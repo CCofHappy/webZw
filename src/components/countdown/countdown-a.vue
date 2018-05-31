@@ -8,7 +8,7 @@
 <template>
   <div class="timeBox fs12">
      <span class="gray">{{ timeState }}：</span>
-      <yd-countdown :time="timeData"  timetype="second">
+      <yd-countdown :time="timeData"  timetype="second" :callback="endUpdate">
         <span v-if="dateType == 1"><span class="timeSpan" >{%d}天</span> :</span>
         <span class="timeSpan">{%h}</span> :
         <span class="timeSpan">{%m}</span> :
@@ -45,6 +45,14 @@ export default {
         this.timeData = (this.endDate - this.serverTime)/1000;
         this.timeState = '距结束'
         // console.log('timeData',this.timeData);
+      }
+    },
+    endUpdate() {
+      if (this.timeState == '距开始') {
+        this.timeData = (this.endDate - this.serverTime)/1000;
+        this.timeState = '距结束'
+      } else {
+        
       }
     }
   }, 

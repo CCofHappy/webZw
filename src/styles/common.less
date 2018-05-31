@@ -1,7 +1,9 @@
 // 1rem = 50px;    设计图纸375px
-@import url('//at.alicdn.com/t/font_674763_j2nb714istyy14i.css');
+@import url('//at.alicdn.com/t/font_674763_2c08wzkjpeukgldi.css');
 .iconfont {
+  position: relative;
   font-size: 0.32rem;
+  top: 1px;
 }
 @charset "utf-8";
 // 公共参数
@@ -17,6 +19,13 @@ body {
 //     min-height: 100%;
 //     height: auto !important;
 // }
+
+// 重置ydui的基础样式-----------用途：根据项目的ui设计，修改ydui的一些通用样式，非通用样式请使用自定义class嵌套
+.yd-radio {
+  padding-right: 0;
+}
+
+
  .skyf{
   font-family: PingFangSC;
  }
@@ -104,6 +113,7 @@ body {
 .border-none {
   border:none !important;
 }
+.radius5{border-radius: 5px;}
 /* ============================================================
    flex：定义布局为盒模型
    flex-v：盒模型垂直布局
@@ -114,10 +124,13 @@ body {
    ============================================================ */
 .flex{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;width: 100%;}
 .flex-v{-webkit-box-orient:vertical;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}
-.flex-1{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;}
+.flex-1{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;position: relative;}
 .flex-align-center{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;}
 .flex-pack-center{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
 .flex-pack-justify{-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}
+.padding-sm>.flex>.flex-1 {padding:.3rem .2rem;}
+.flex-border .flex-1:first-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;left: .2rem;}
+.flex-border .flex-1:last-child:after {position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;right: .2rem;}
 
 // 纯布局，需要其他样式请另外添加样式名，如带边框的布局，cl-box-border，斑马线cl-box-crossing，.cl-box-bottom只要下边线
 .cl-box{display:table;width:100%}
@@ -129,11 +142,7 @@ body {
 .cl-box-border .cl-td:first-child:after, .cl-box-bottom .cl-td:first-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;left: .2rem;}
 .cl-box-border .cl-td:last-child:after, .cl-box-bottom .cl-td:last-child:after{position: absolute;width: 100%;height: 1px;background: #EBEBEB;content: ' ';bottom: 0;right: .2rem;}
 .cl-box-border .cl-row:last-child .cl-td:after{height: 0;}
-
-// .cl-row:nth-child(odd){background-color:#F5F5F5}
-// .cl-row:last-child .cl-td{border-bottom:1px solid #E3E3E3}
-// .cl-row .cl-td:first-child{width:34%;border-left:1px solid #E3E3E3;border-right:1px solid #E3E3E3}
-// .cl-row .cl-td:last-child{width:66%;border-right:1px solid #E3E3E3}
+.cl-row-none.cl-row .cl-td:after{height: 0;}
 
 // 底部带.2rem的灰间隔，上下0.4rem
 .list-child {
@@ -189,12 +198,21 @@ body {
 .fw600{
   font-weight: 600;
 }
+//深灰
+.dgray {
+  color: #282828;
+}
 /*灰色*/
 .gray {
   color: #B5B5B5;
 }
+// 浅灰
 .fgray {
   color: #B9B9B9;
+}
+//淡灰
+.ffgray {
+  color: #CCCCCC;
 }
 .red {
   color: #C93F09;
@@ -202,6 +220,10 @@ body {
 /*浅红*/
 .fred {
   color:#D58B5E;
+}
+//浅橙色
+.forange{
+    color: #CD733B;
 }
 // 字体黑
 .fblack {
@@ -214,6 +236,17 @@ body {
 .white {
   color: #FFFFFF;
 }
+
+//常用图片大小
+.imgSize50{
+    width: 1rem;
+    height: 1rem;
+}
+.imgSize160{
+    width: 3.2rem;
+    height: 3.2rem;
+}
+
 // 文字处理
 // 超出宽度显示省略号(如果没有效果，要考虑下作用元素上的宽度问题)
 .textfir {
@@ -313,14 +346,36 @@ body {
     z-index: 999;
     background: #FFFFFF;
 }
+.footerFixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+}
+/*   底部固定块级按钮
+<footer class="footerFixed">
+<yd-button class="sky-btn-orange fs16" @click.native="submit" size="large" type="primary">提交</yd-button>
+</footer>
+*/
 // 输入框
 .sky-inp {
   background-color: #F2F2F2;
   border:none;
   padding: 0.1rem;
   display: inline-block;
-
 }
+.sky-inp-max {
+  background-color: #F7F7F7;
+  border:none;
+  padding: .2rem .1rem;
+  display: inline-block;
+  width: 100%;
+}
+// 输入框底纹字体颜色 
+.sky-p-gray:-ms-input-placeholder{color:#979797;}/* Internet Explorer 10+ */ 
+.sky-p-gray::-webkit-input-placeholder{color:#979797;}/* WebKit browsers */
+.sky-p-gray::-moz-placeholder{color:#979797;}/* Mozilla Firefox 4 to 18 */ 
+.sky-p-gray:-moz-placeholder{color:#979797;}/* Mozilla Firefox 19+ */ 
 // 开关
 .skySwitch {
   height: 26px;
@@ -343,12 +398,13 @@ body {
 }
 // 按钮  橙色黑底（私洽按钮）
 .yd-btn.sky-btn-orange {
+  padding: 0 .24rem;
+}
+.sky-btn-orange,.sky-btn-orange:active {
   border: 1px solid #AB6337;
   background-color: #272727;
   color: #AB6337;
-  padding: 0 .24rem;
 }
-
 // 按钮  灰字灰边（查看物流按钮）
 .yd-btn.sky-btn-gray {
   border: 1px solid #CACACA;
@@ -872,6 +928,52 @@ transform: translate(-30px, 0);
     }
   }
 }
+
+// 我的竞拍
+.my-sale-box {
+  .yd-tab-panel {
+      margin-top: 2rem;
+  }
+  .yd-list-donetip {
+     background: none;
+  }
+  .yd-tab-nav {
+    .yd-tab-nav-item {
+      background-color: #F7F7F7;
+      color: #979797;
+      font-size: .32rem;
+    }
+    .yd-tab-active {
+      color: #272727;
+    }
+    .yd-tab-active:before {
+        width: 20%;
+        margin-left: -10%;
+        color: #CD733B;
+        height: 3px;
+    }
+  } 
+  .yd-tab-nav-item:not(:last-child):after{
+     top: 0;
+     height: 100%;
+     border-right: 4px solid #FFFFFF;
+  }
+}
+
+
+//物流跟踪
+.sky-timeline-l {
+    padding-left: 1.3rem;
+    &:after,.yd-timeline-custom-item:not(:last-child):after, .yd-timeline-item:not(:last-child):after {
+        border: none;
+    }
+    .yd-timeline-custom-item {
+        margin-top: .4rem;
+    }
+    
+}
+
+
 
 
 // 弹窗（中间弹出）

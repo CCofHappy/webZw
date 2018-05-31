@@ -4,9 +4,9 @@
           <a href="javascript:void(0)" slot="left">
             <yd-navbar-back-icon @click.native="$router.go(-1)"></yd-navbar-back-icon>
           </a>
-          <a href="/order/saleBreakOrder" slot="right">
-            违约单
-          </a>
+          <router-link :to="{name:'saleBreakOrder'}" slot="right">
+         			 违约单
+          </router-link>
       </yd-navbar>
       <yd-tab class="orderMenus" v-model="tab" active-color="#CC733D">
         <yd-tab-panel label="待付款">
@@ -169,7 +169,10 @@ export default {
         this.api.paymentCheck()
         .then((res) => {
           if(res.state){
-            this.router.push(`checkout/${this.pending}`)
+            this.router.push({
+            	name:'checkout',
+            	params:{Sseq:this.pending}
+            })
           }else {
             this.$dialog.toast({
               mes:res.data.message

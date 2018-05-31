@@ -1,5 +1,7 @@
 require('./utils/bootstrap');
 import Vue from 'vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'       
 import store from '@/store'         
@@ -14,12 +16,13 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css' //引入swiper滑块样式
 // import './styles/index.css'
 import './styles/common.less'
+import './styles/init.less'
+Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VeeValidate,Veeconfig);
 Vue.use(VueLocalStorage)
 Vue.config.productionTip = false
 Vue.prototype.api = api;
-Vue.prototype.formtDate = window.formtDate;
 // ajax请求
 Vue.prototype.ajaxPost = function(url,postData,callback){
   fly.post(url,postData)

@@ -71,7 +71,7 @@ Date.prototype.Format = function(fmt) { //author: meizz
 };
 
 
-// 调用方法   
+// 调用方法  时间格式化 
 window.formtDate = function(date,type){
     if(!date) return;
     switch(type){
@@ -104,3 +104,16 @@ window.formtDate = function(date,type){
             break;
     }
 };
+Vue.prototype.phoneText = window.phoneText;
+// 全局过滤器
+// replaceSG---去掉空格
+Vue.filter('replaceSG', function (value) {
+  if (!value) return ''
+  value = value.replace(/\s/g,"")
+  return value
+})
+Vue.filter('phoneText', function (value) {
+  if (!value) return ''
+  value = value.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+  return value
+})

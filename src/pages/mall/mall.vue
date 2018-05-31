@@ -9,7 +9,7 @@
               <span>消息</span>
             </div>
           </router-link>
-          <div slot="center" class="search"><i class="iconfont icon-sousuo"></i> 快速搜索</div>
+          <div slot="center" class="search" @click="clickSearch"><i class="iconfont icon-sousuo"></i> 快速搜索</div>
           <router-link to="#" slot="right">
               <div class="iconBox">
                 <i class="iconfont">&#xe65a;</i>
@@ -19,81 +19,139 @@
       </yd-navbar>
     </div>
     <bannera class="margin-top-lg" :bannerData="bannerData1"></bannera>
-    <div v-if="bannerData4">
-        <div class="box-type">
-          <b class="cn">正在热拍</b>
-          <div class="en margin-top-xs">UNDER AUCTION</div>
-        </div>
-      <bannerd class="list-child" :bannerData="bannerData4" :serverTime="serverTime"></bannerd>
-    </div>
 
-    <div v-if="daySale.length">
-      <router-link to="/session/daily">
-       <div class="box-type">
-        <b class="cn">每日一拍</b>
-        <div class="en margin-top-xs">Recommended collection</div>
-        <i class="iconfont icon-Slice"></i>
-       </div>
-      </router-link>
-      <!-- 每日一拍拍品列表 -->
-      <goods :listData="daySale"></goods>
-    </div>
-
-    <div v-if="bannerData3.length" class="padding-top-md padding-bottom-md">
-       <div class="lists">
-        <router-link to="/goods/pick">
-         <div class="child">
-            <b class="cntitle">饮用精选</b>
-            <p class="entitle">DRINK SELECTION</p>
-            <i class="iconRight iconfont icon-Slicex13"></i>
-          </div>
-        </router-link>
-        <bannerc :bannerData="bannerData3"></bannerc>
-      </div>
-    </div>
-
-
+    <!-- 限时抢购 -->
     <div v-if="outSale.length">
-        <div class="box-type">
-          <b class="cn">历史拍卖</b>
-          <div class="en margin-top-xs">Recommended collection</div>
-        </div>
-        <!-- 拍场轮播 -->
-      <bannerb :bannerData="bannerData2"></bannerb>
-
-
        <div class="lists padding-top-md">
         <router-link to="/goods/history">
           <div class="child">
-            <b class="cntitle">历史拍品</b>
-            <p class="entitle">DRINK SELECTION</p>
+            <b class="cntitle">限时抢购</b>
+            <!-- <p class="entitle">DRINK SELECTION</p> -->
+            <countdowna :serverTime="serverTimeTest" :startDate="startDateTest" :endDate="endDateTest" :dateType="1"></countdowna>
             <i class="iconRight iconfont icon-Slicex13"></i>
           </div>
         </router-link>
-          <!-- 历史拍品列表 -->
-          <goods :listData="outSale"></goods>
+          <yd-list theme="4">
+              <yd-list-item v-for="item, key in list" :key="key">
+                  <img slot="img" :src="item.img">
+                  <span slot="title">{{item.title}}</span>
+                  <yd-list-other slot="other">
+                      <div>
+                          <span class="demo-list-price"><em>¥</em>{{item.price}}</span>
+                          <span class="demo-list-del-price">¥{{item.w_price}}</span>
+                          <yd-flexbox>
+                              <yd-flexbox-item><yd-progressbar class="progress" type="line" :progress="progress" trail-width="8" stroke-width="8" trail-color="#FDB081"></yd-progressbar></yd-flexbox-item>
+                              <div>&nbsp;&nbsp;&nbsp;</div>
+                              <yd-flexbox-item class="flexbox-fontSize">剩余200件</yd-flexbox-item>
+                          </yd-flexbox>
+                          <yd-flexbox class="flexBottom">
+                              <div class="discount">￥10000</div>
+                              <yd-flexbox-item class="originalPrice">￥13000</yd-flexbox-item>
+                          </yd-flexbox>
+                          <yd-button class="performBtn" bgcolor="#282828" color="#FFF">马上抢</yd-button>
+                      </div>
+                  </yd-list-other>
+              </yd-list-item>
+          </yd-list>
+       </div>
+    </div>
+    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div>
+      <!-- <div class="lists padding-top-md">
+        <router-link to="/goods/history">
+          <div class="child">
+            <b class="cntitle">珍品预售<span class="gray rightSpan">已售：<span class="fred">10件</span></span></b>
+            <p class="entitle">布朗拉35年 1978-2014</p>
+            
+          </div>
+        </router-link>
+          <yd-list theme="5">
+              <yd-list-item v-for="item, key in list" :key="key">
+                  <img slot="img" :src="item.img">                  
+              </yd-list-item>
+          </yd-list>
+       </div> -->
+      <single-mall-list :itemData="singleMallData"></single-mall-list>
+    </div>
+    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div>
+      <div class="lists padding-top-md">
+        <router-link to="/goods/history1">
+          <div class="child">
+            <b class="cntitle">拼团优惠<span class="gray rightSpan">已售：<span class="fred">10人团</span></span></b>
+            <p class="entitle">限时团购 不容错过</p>
+          </div>
+        </router-link>
+          <yd-list theme="4">
+              <yd-list-item v-for="item, key in list" :key="key">
+                  <img slot="img" :src="item.img">
+                  <span slot="title">POLT ENLLEN</span>
+                  <yd-list-other slot="other">
+                      <div>
+                          <span class="demo-list-price">波特艾伦25年 19763001 道格拉斯</span>
+                          <!-- <span class="demo-list-del-price">¥{{item.w_price}}</span> -->
+                          <yd-flexbox>
+                              <yd-flexbox-item class="capacity">
+                                <span style="padding-right: 0.2rem;">净含量：700ml</span>
+                                <span>酒精度：62.3%vol.</span>
+                              </yd-flexbox-item>
+                          </yd-flexbox>
+                          <yd-flexbox class="flexBottom">
+                              <div class="discount">￥10000</div>
+                              <yd-flexbox-item class="originalPrice">￥13000</yd-flexbox-item>
+                          </yd-flexbox>
+                          <yd-button class="performBtn" bgcolor="#282828" color="#FFF">去拼团</yd-button>
+                      </div>
+                  </yd-list-other>
+              </yd-list-item>
 
+          </yd-list>
+       </div>
+    </div>
+    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div>
+      <!-- <div class="lists padding-top-md">
+        <router-link to="/goods/history">
+          <div class="child">
+            <b class="cntitle">稀酿摇号<span class="gray rightSpan">参与人数：<span class="fred">200人</span></span></b>
+            <p class="entitle">布朗拉35年 1978-2014</p>
+          </div>
+        </router-link>
+          <yd-list theme="5">
+              <yd-list-item v-for="item, key in list" :key="key">
+                  <img slot="img" :src="item.img">                  
+              </yd-list-item>
+          </yd-list>
+       </div> -->
+      <single-mall-list :itemData="singleMallData1"></single-mall-list>
+    </div>
+    <div>
+      <div class="box-type">
+        <b class="cn">全部商品</b>
+        <div class="en margin-top-xs">PRODUCTS RECOMMENDED</div>
+        <i class="iconRight iconfont icon-Slicex13"></i>
       </div>
+      <yd-list theme="3">
+          <commodityList v-for="item, key in list1" :itemData="item" :key="key"></commodityList>
+      </yd-list>
     </div>
   </div>
 </template>
 
 <script>
 import bannera from '@/components/banner/banner-a.vue'
-import bannerb from '@/components/banner/banner-b.vue'
-import bannerc from '@/components/banner/banner-c.vue'
-import bannerd from '@/components/banner/banner-d.vue'
-import goods from '@/components/lists/Lists.vue'
 import loading from '@/components/common/loading.vue'
+import countdowna from '@/components/countdown/countdown-a.vue'
+import commodityList from '@/components/lists/commodityList.vue'
+import singleMallList from '@/components/lists/singleMallList.vue'
 export default {
   name: 'mall',
   components: {
         bannera,
-        bannerb,
-        bannerc,
-        bannerd,
-        goods,
-        loading
+        loading,
+        commodityList,
+        countdowna,
+        singleMallList
     },
   data () {
     return {
@@ -104,14 +162,47 @@ export default {
        bannerData4:[],
        daySale: [],    //每日一拍
        outSale: [],    //历史拍卖
-       serverTime:null,  //服务器时间
+       // serverTime:null,  //服务器时间
+       serverTimeTest: 111100000,
+       startDateTest: 111110000,
+       endDateTest: 111120000,
+       list: [
+                    {img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36}
+                ],
+        list1: [
+                    {img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
+                    {img: "//img1.shikee.com/try/2016/06/21/10172020923917672923.jpg", title: "标题222标题标题标题标题", price: 256.23, w_price: 89.36},
+                    {img: "//img1.shikee.com/try/2016/06/23/15395220917905380014.jpg", title: "标题333标题标题标题标题", price: 356.23, w_price: 89.36},
+                    {img: "//img1.shikee.com/try/2016/06/25/14244120933639105658.jpg", title: "标题444标题标题标题标题", price: 456.23, w_price: 89.36},
+                    {img: "//img1.shikee.com/try/2016/06/26/12365720933909085511.jpg", title: "标题555标题标题标题标题", price: 556.23, w_price: 89.36},
+                    {img: "//img1.shikee.com/try/2016/06/19/09430120929215230041.jpg", title: "标题666标题标题标题标题", price: 656.23, w_price: 89.36}
+                ],
+        progress: 0.5,
+        singleMallData: {
+          path: "/goods/history",
+          title: "珍品预售",
+          details: "布朗拉35年 1978-2014",
+          describe: "已售：",
+          number: "100件",
+          img: "//img1.shikee.com/try/2016/06/23/15395220917905380014.jpg"
+        },
+        singleMallData1: {
+          path: "/goods/history",
+          title: "稀酿摇号",
+          details: "布朗拉35年 1978-2014",
+          describe: "参与人数：",
+          number: "200人",
+          img: "//img1.shikee.com/try/2016/06/26/12365720933909085511.jpg"
+        }
     }
   },
   computed: {
 
   },
   methods: {
-
+    clickSearch() {
+      this.$router.push({name: 'search'})
+    }
   },
   mounted() {
     this.$nextTick(function () {
@@ -134,7 +225,7 @@ export default {
        if(history.state){
         this.outSale = history.data;
        }
-       this.serverTime = serverTime;
+       // this.serverTime = serverTime;
        setTimeout(()=>{
          this.Vloading = false;
        },500)
@@ -164,4 +255,21 @@ export default {
   }
 
 }
+.progress {width:2.4rem;}
+.yd-progressbar svg {height:.2rem;}
+.yd-list-other {color: #424040;}
+.flexbox-fontSize {font-size:.2rem;}
+.discount {font-size: .36rem; color: #C93B00; padding-right: .1rem;}
+.originalPrice {font-size: .24rem; text-decoration: line-through;}
+.flexBottom {position: absolute; bottom: .1rem;}
+.child {position:relative;}
+.child p {padding-top: .16rem;}
+.rightSpan {position: absolute; font-size: .24rem; right:0px;}
+
+.capacity {font-size:.24rem; color:#979797; padding-top: .1rem;}
+
+.performBtn {position: absolute; right:.2rem; bottom: .1rem; color:#CD733B!important;}
+
+
+
 </style>
