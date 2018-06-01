@@ -15,14 +15,14 @@
         </yd-navbar>
         <div style="position: static; margin-top: 0.8rem;">
             <span style="font-size: .32rem; margin-left: 0.24rem;font-weight: 500;">大家都在搜</span>
-            <yd-button type="primary" class="iconfont icon-Slicex10" style="position: absolute;right: .16rem;"></yd-button>
+            <yd-button type="primary" class="iconfont icon-msnui-refresh-line" style="position: absolute;right: .16rem; color: #979797;"></yd-button>
         </div>
 		<div style="margin-top: .4rem; margin-left: .24rem; margin-right: .24rem;">
 			<yd-button type="warning" v-for="item,key in publicSearch" :key="key" @click.native="clickSearchResult(item)">{{ item }}</yd-button>
 		</div>
 		<div style="position: static; margin-top: .8rem;">
             <span style="font-size: .32rem; margin-left: .24rem;font-weight: 500;">历史搜索</span>
-            <yd-button type="primary" class="iconfont" style="position: absolute;right: .16rem;">&#xe65a;</yd-button>
+            <yd-button type="primary" class="iconfont icon-Slicex14" style="position: absolute;right: .16rem; color: #979797;"></yd-button>
         </div>
 		<div style="margin-top: .4rem; margin-left: .24rem; margin-right: .24rem;">
 			<yd-button type="warning" v-for="item,key in publicSearch" :key="key">{{ item }}</yd-button>

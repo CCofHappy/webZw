@@ -10,11 +10,11 @@
           </router-link>
       </yd-navbar>
 		<!--没有收货地址的时候-->
-		<div class="noMessage text-center margin-top-lg" v-if="!data.length">
+		<div class="noMessage text-center margin-top-lg padding-top-lg" v-if="!data.length">
 			<img class="imgSize160" src="../../assets/no/noMessage.png" />
 			<p class="margin-top-md gray fs16">暂无信息</p>
 			<p class="ffgray fs14 margin-top-sm">赶紧添加收货人信息吧</p>
-			<yd-button class="addBtn" type="hollow" bgcolor="#F2F2F2"><i class="iconfont icon-plus-add"></i> 添加</yd-button>
+			<yd-button class="addBtn" type="hollow" bgcolor="#F2F2F2" @click.native="add" ><i class="iconfont icon-plus-add"></i> 添加</yd-button>
 		</div>
 		<!--收货地址列表-->
 		<div class="padding-sm margin-top-lg">
@@ -40,7 +40,11 @@
 
 		},
 		methods: {
-
+				add(){
+		  		this.$router.push({
+		  			name:'addressAdd'
+		  		})
+		  	},
 		},
 		mounted() {
 			this.api.customerSeqADD(Cookie.get('userSeq'))
@@ -57,7 +61,7 @@
 	}
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 	.addBtn {
 		width: 2rem;
 		border: 1px solid;
@@ -74,6 +78,7 @@
 		display: none;
 	}
 	.addressCell {
+		margin-top: .2rem;
 		position: relative;
 		padding: .4rem 1.4rem .4rem .2rem;
 		background: #FFFFFF;
@@ -89,10 +94,11 @@
 	}
 	
 	.addressCell.active {
+		margin-bottom: .3rem;
 		&:after {
 			content: "";
 			position: absolute;
-			bottom: 0;
+			bottom: -.1rem;
 			left: 0;
 			width: 100%;
 			height: 0.1rem;

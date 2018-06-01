@@ -15,7 +15,6 @@ number：带单位的数量
       <div class="child">
         <b class="cntitle">{{itemData.title}}<span class="gray rightSpan">{{itemData.describe}}<span class="fred">{{itemData.number}}</span></span></b>
         <p class="entitle">{{itemData.details}}</p>
-        
       </div>
     </router-link>
       <yd-list theme="5">

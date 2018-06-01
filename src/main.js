@@ -1,11 +1,11 @@
 require('./utils/bootstrap');
 import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'       
 import store from '@/store'         
-import YDUI from 'vue-ydui'       
+import YDUI from 'vue-ydui' 
+import { Radio } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import VueLazyload from 'vue-lazyload'  
 // import FastClick from 'fastclick'     //解决点击事件延迟问题
 import VueLocalStorage from 'vue-localstorage'
@@ -17,7 +17,8 @@ import 'swiper/dist/css/swiper.css' //引入swiper滑块样式
 // import './styles/index.css'
 import './styles/common.less'
 import './styles/init.less'
-Vue.use(ElementUI);
+Vue.use(Radio);
+Vue.component(Radio.name, Radio);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VeeValidate,Veeconfig);
 Vue.use(VueLocalStorage)
@@ -84,5 +85,5 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })

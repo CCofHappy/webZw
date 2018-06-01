@@ -104,7 +104,7 @@ window.formtDate = function(date,type){
             break;
     }
 };
-Vue.prototype.phoneText = window.phoneText;
+Vue.prototype.formtDate = window.formtDate;
 // 全局过滤器
 // replaceSG---去掉空格
 Vue.filter('replaceSG', function (value) {

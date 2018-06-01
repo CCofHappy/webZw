@@ -1,12 +1,12 @@
 <template>
 	
 	<div>
-		<yd-navbar title="全部商品" bgcolor="#F8F8F8" fontsize=".36rem" color="#282828">
+		<yd-navbar title="全部商品" bgcolor="#F8F8F8" fontsize=".36rem" color="#282828" :fixed="true">
 	        <router-link :to="{name:'mall'}" slot="left">
 	            <yd-navbar-back-icon></yd-navbar-back-icon>
 	        </router-link>
 	    </yd-navbar>
-    	<div class="flex-align-center" style="width: 100%; height: .88rem; background-color: #F8F8F8; display: flex;flex-direction: row;">
+    	<div class="flex-align-center" style="width: 100%; height: .88rem; background-color: #F8F8F8; display: flex;flex-direction: row; margin-top: .88rem;">
 			<div class="flex-1">
 				<yd-button style="color: #CD733B;padding-left: .44rem;" type="hollow" class="iconfont">默认排序</yd-button>
 			</div>

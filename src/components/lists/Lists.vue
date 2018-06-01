@@ -1,8 +1,9 @@
  
 <template>
      <yd-list theme="2" class="ydlist">
-        <yd-list-item v-for="item, key in listData" :key="key" :href="`/detail/good/${item.auctionSessionSeq}/${item.auctionGoodsSeq}`">
-          <!-- <router-link :to="{name:'goodsDetail',params:{Gseq: `${item.auctionGoodsSeq}`, Sseq: `${item.auctionSessionSeq}`}}"> -->
+     	 <!--:href="`/detail/good/${item.auctionSessionSeq}/${item.auctionGoodsSeq}`"-->
+ 	    <router-link  v-for="item, key in listData" :key="key" :to="{name:'goodsDetail',params:{Gseq: `${item.auctionGoodsSeq}`, Sseq: `${item.auctionSessionSeq}`}}"> 
+        <yd-list-item>
             <img slot="img" v-if="item.auctionGoodsIcon" :src="item.auctionGoodsIcon">
             <img slot="img" v-else="item.auctionGoodsIcon" src="@/assets/applogo.png">
             <span slot="title">{{item.auctionGoodsEName ? item.auctionGoodsEName : 'PORT ELLEN'}}</span>
@@ -26,8 +27,9 @@
                 <span class="PriceTitle">成交价:流拍</span>
               </div>
             </yd-list-other>
-        <!-- </router-link> -->
+        
         </yd-list-item>
+         </router-link> 
     </yd-list>
 </template>
 

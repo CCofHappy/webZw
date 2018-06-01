@@ -291,6 +291,24 @@ export default new Router({
 								title: '管理地址',
 								requireAuth: true
 							}
+						},
+						{	//添加地址
+							path: 'addressAdd',
+							name: 'addressAdd',
+							component: resolve => require(['../pages/common/addressEdit.vue'], resolve),
+							meta: {
+								title: '添加收货地址',
+								requireAuth: true
+							}
+						},
+						{	//编辑地址   seq --- 地址seq
+							path: 'addressEdit/:seq',
+							name: 'addressEdit',
+							component: resolve => require(['../pages/common/addressEdit.vue'], resolve),
+							meta: {
+								title: '编辑收货地址',
+								requireAuth: true
+							}
 						}
 					]
 				},

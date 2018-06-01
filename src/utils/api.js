@@ -237,7 +237,54 @@ const api = {
 	customerSeqADD: function(customerSeq) {
 		return fly.post('/app/person/customerSeqADD/' + customerSeq);
 	},
-
+	/* 	添加收货地址
+	   入参：
+		customerSeq,
+		province   ---   省市区
+		consignee  ---  收货人
+		phone ---  联系电话
+		addr --- 详细地址
+		flag --- 是否设置为默认    1--设置为默认地址   0---不设置默认
+		pCode --- 省级code
+		cCode --- 市级code
+		pCode --- 区级code
+	   */
+	addDeliveryAddr: function(postData) {
+		return fly.post('/app/person/addDeliveryAddr',postData);
+	},
+	/* 	编辑收货地址
+	   入参：
+		customerSeq,
+		province   ---   省市区
+		consignee  ---  收货人
+		phone ---  联系电话
+		addr --- 详细地址
+		flag --- 是否设置为默认    1--设置为默认地址   0---不设置默认
+		deliveryAddrSeq  ---  编辑的地址seq
+		pCode --- 省级code
+		cCode --- 市级code
+		pCode --- 区级code
+	   */
+	editDeliveryAddr: function(postData) {
+		return fly.post('/app/person/editDeliveryAddr',postData);
+	},
+	/* 	删除收货地址
+	   入参：
+		customerSeq,
+		deliveryAddrSeq   --- 收货地址seq
+	   */
+	delDeliveryAddr: function(customerSeq,deliveryAddrSeq) {
+		return fly.post(`/app/person/delDeliveryAddr/${deliveryAddrSeq}/${customerSeq}`);
+	},
+	/* 	获取指定收货地址
+	   入参：
+		deliveryAddrSeq   --- 收货地址seq
+	   */
+	findByDeliveryAddr: function(deliveryAddrSeq) {
+		return fly.post(`/app/person/findByDeliveryAddr/${deliveryAddrSeq}`);
+	},
+	
+	
 	//获取服务器时间
 	getServerTime: async function() {
 		let time;

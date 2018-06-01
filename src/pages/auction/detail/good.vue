@@ -243,6 +243,7 @@ export default {
         this.bondPayedOrNot = bondPayedOrNot.state
         this.isNotFavorite = isNotFavorite.state
         this.$store.dispatch('getServerTime');//更新服务器时间
+        window.scroll(0,0)
     }))
     .catch((error)=>{
       console.log(error)
@@ -326,35 +327,7 @@ export default {
     width: 100%;
   }
  }
- .detailsFooter {
-    border: 1px solid #F4F4F4;
-    height: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 999;
-    background: #FFFFFF;
-   a{
-    margin-top: 0.2rem;
-    display: block;
-    float: left;
-    text-align: center;
-    margin-left: 0.4rem;
-    margin-right: 0.4rem;
-    i{
-      display: block;
-    }
-    span{
-      font-size: 0.2rem;
-    }
-   }
-   .sky-btn {
-      width: 4.6rem;
-      height: 1rem;
-      float: right;
-      font-size: .32rem;
-    }
- }
+ 
  
  .bidRecord {
   display: block;
