@@ -3,20 +3,27 @@
 		<transition :name="transitionName"  mode="out-in">
 			<router-view class="child-view"></router-view>
 		</transition>
+		<transition name="fade"  mode="out-in">
+			<loading v-show="loading"></loading>
+		</transition>
 	</div>
 </template>
 
 <script>
+import loading from '@/components/common/loading.vue'
 import { mapState, mapMutations, mapActions } from 'vuex'    //vuex状态管理器，主要使用store/index.js
 export default {
 	name: 'app',
+	components:{
+		loading
+	},
 	data() {
 		return {
-			 
 		}
 	},
 	computed:mapState({
-		transitionName:state => state.transition.transitionName
+		transitionName:state => state.transition.transitionName,
+		loading:state => state.transition.loading,
 	}),
 	methods: {
 		...mapMutations([

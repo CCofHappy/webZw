@@ -3,7 +3,7 @@
   <div>
     <titleHead :fixed="true" :bg="'#F7F7F7'"></titleHead>
     <div class="recordChild" v-for="item,key in record">
-      <span>{{postData.customerSeq==item.customerSeq ? `我${item.signNo}` : item.signNo}}</span>
+      <span style="display: inline-block;width: 1.1rem;">{{postData.customerSeq==item.customerSeq ? `我${item.signNo}` : item.signNo}}</span>
       <span class="margin-left-lg padding-right-md margin-right-md">04-12 12:23:50</span>
       <span>
         <span v-if="key==0&&item.offerState==1" class="bgred white fs10 padding-xxs">领先</span>

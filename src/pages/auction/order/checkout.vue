@@ -6,7 +6,8 @@
           <yd-cell-item>
               <span slot="left" class="fw600">收货人信息</span>
           </yd-cell-item>
-          <yd-cell-item class="widthRich">
+          <router-link :to="{name:'addressList'}">
+          	<yd-cell-item class="widthRich">
               <div slot="left" class="position">
                 <p class="clearfix">
                   <span class="pull-left">{{deliveryAddr.consignee}}</span>
@@ -18,6 +19,8 @@
                 <i class="iconfont icon-Slicex13 fs12"></i>
               </div>
           </yd-cell-item>
+          </router-link>
+          
       </yd-cell-group>
 
       <yd-cell-group>
@@ -85,6 +88,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations} from 'vuex'
 import titleHead from '@/components/common/Title/Thead.vue'
 export default {
   components: {
@@ -92,35 +96,60 @@ export default {
     },
   data () {
     return {
-      postData: {
         customerSeq:Cookie.get('userSeq'),
         // customerSeq:990512,
-        deliveryAddrSeq:'',
-        snapshotSeqArray: [this.$route.params.Sseq]
-      },
+        snapshotSeqArray: [this.$route.params.Sseq],
       deliveryAddr:{},    //地址数据
       orderDes: {},      //订单价格清单数据
-      paySnapshot:[],    //订单拍品数据
+      paySnapshot:[],    //订单拍品数据(这个订单下面一共有多少个拍品)
       cusInvoice:{}      //发票数据
     }
   },
   computed: {
+  	...mapState({
+      deliveryAddrSeq: state => state.Data.deliveryAddrSeq,
+    })
       
   },
   methods: {
   	 submit(){
-  	 	
+  	 	  //存放的数据，供跳转到支付页面后使用
+  	 	  let data = {
+  	 	  	auctionGoodsSeqStr:'',
+  	 	  	auctionSessionSeqStr:'',
+  	 	  	totalFee:this.orderDes.totalFee,
+  	 	  	payType:104,
+  	 	  	invoiceSeq:this.cusInvoice.invoiceSeq,
+  	 	  	deliveryAddrSeq:this.deliveryAddr.deliveryAddrSeq,
+  	 	  	customerSeq:Cookie.get('userSeq')
+  	 	  }
+  	 	  //参考小程序的入参
+  	 		this.paySnapshot.forEach((e)=>{
+  	 			data.auctionGoodsSeqStr += e.auctionGoodsSeq + ","
+  	 			data.auctionSessionSeqStr += e.auctionSessionSeq + ","
+  	 		})
+  	 	  this.$localStorage.set('payOrder',JSON.stringify(data))
+  	 		this.$router.replace({
+  	 			name:'salePay'
+  	 		})
+  	 },
+  	 getData(){
+  	 	 fly.all([this.api.paySnapshot({
+  	 	 	customerSeq:Cookie.get('userSeq'),
+  	 	 	snapshotSeqArray: [this.$route.params.Sseq,this.$route.params.Sseq],
+  	 	 	deliveryAddrSeq:this.deliveryAddrSeq
+  	 	 }),this.api.cusInvoice({customerSeq:this.customerSeq})])
+	       .then(fly.spread((paySnapshot, cusInvoice) => {
+	          this.deliveryAddr = paySnapshot.data.deliveryAddr
+	          this.orderDes = paySnapshot.data.orderDes
+	          this.paySnapshot = paySnapshot.data.paySnapshot
+	          this.cusInvoice = cusInvoice.data
+	      }))
   	 }
       
   },
   mounted() {
-       fly.all([this.api.paySnapshot(this.postData),this.api.cusInvoice({customerSeq:this.postData.customerSeq})])
-       .then(fly.spread((paySnapshot, cusInvoice) => {
-          this.deliveryAddr = paySnapshot.data.deliveryAddr
-          this.orderDes = paySnapshot.data.orderDes
-          this.paySnapshot = paySnapshot.data.paySnapshot
-          this.cusInvoice = cusInvoice.data
-      }))
+      this.getData()
       
   },
   watch: {

@@ -114,19 +114,26 @@ export default {
            'setBiddenPopup',
            'setNegotiateData',
            'setNegotiatePopup',
-           'setPayUrl'
         ]),
         // 出价弹出框
         bidden(){
-            this.setBiddenData(this.item);
-            this.setBiddenPopup(true);
+        	this.api.getHighestPrice({
+        		 "auctionGoodsSeq":this.item.auctionGoodsSeq,
+                 "auctionSessionSeq":this.item.auctionSessionSeq,
+                 "customerSeq":this.userSeq
+        	})
+        	.then((res) => {
+        		this.setBiddenData(res.data);
+            	this.setBiddenPopup(true);
+        	})
+            
         },
         
          // 去交保证金
         goPayBoon() {
             // 把支付前地址存起来，用于三方支付完之后跳转
-            this.setPayUrl(window.location.href);
-            this.$router.push({
+            this.$localStorage.set('payUrl',window.location.href)
+            this.$router.replace({
                 name:'boonPay',
                 query:{
                     sessionSeq:this.item.auctionSessionSeq,

@@ -18,7 +18,7 @@
 		</div>
 		<!--收货地址列表-->
 		<div class="padding-sm margin-top-lg">
-			<div  v-for="item,key in data" class="addressCell" :class="item.flag == 1 ? 'active' : ''">
+			<div  v-for="item,key in data" class="addressCell" :class="item.flag == 1 ? 'active' : ''" @click="chooseAdd(item.deliveryAddrSeq)">
 				<p><span class="name">{{item.consignee}}</span> <span class="phone">{{item.phone | phoneText}}</span><i class="iconfont icon-Group forange margin-left-md" ></i></p>
 				<p class="margin-top-sm dgray">{{item.province + item.addr}}</p>
 			</div>
@@ -41,10 +41,15 @@
 		},
 		methods: {
 				add(){
-		  		this.$router.push({
-		  			name:'addressAdd'
-		  		})
-		  	},
+			  		this.$router.push({
+			  			name:'addressAdd'
+			  		})
+			  	},
+			  	//选择完地址后，往vuex存放选中的地址seq，然后返回选择地址之前的页面，前一个页面就取vuex中的地址seq去请求数据
+			  	chooseAdd(deliveryAddrSeq){
+			  		this.$store.commit('setDeliveryAddrSeq',deliveryAddrSeq);
+			  		this.$router.go(-1)
+			  	}
 		},
 		mounted() {
 			this.api.customerSeqADD(Cookie.get('userSeq'))

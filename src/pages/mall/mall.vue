@@ -56,11 +56,11 @@
           </yd-list>
        </div>
     </div>
-    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div class="segmentation"></div>
     <div>
       <single-mall-list :itemData="singleMallData"></single-mall-list>
     </div>
-    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div class="segmentation"></div>
     <div>
       <div class="lists padding-top-md">
         <router-link :to="{name:'allMall'}">
@@ -94,7 +94,7 @@
           </yd-list>
        </div>
     </div>
-    <div style="height: .2rem;background-color: #F2F2F2;"></div>
+    <div class="segmentation"></div>
     <div>
       <single-mall-list :itemData="singleMallData1"></single-mall-list>
     </div>
@@ -250,4 +250,20 @@
   .yd-list-theme4 { padding: 0px; }
   .entitle { margin-bottom: 0px; }
   .timeBox { padding-bottom: 0px !important; }
+
 </style>
+
+<style lang="less">
+  .text-center {
+    .yd-navbar-center-box {
+      width: 100%;
+    }
+    .yd-navbar-item:first-child {
+      margin-right: -22%;
+    }
+    .yd-navbar-item {
+      flex: none;
+    }
+  }
+</style>
+

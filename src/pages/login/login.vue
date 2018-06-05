@@ -49,8 +49,8 @@ export default {
         fly.post('app/person/login',{'customerLogin':this.customerLogin,'customerPwd':md5(this.customerPwd)})
         .then(res => {
           if(res.state) {
-             Cookie.set('token',res.data.etoken,{expires:1});     //把token存到cookie
-             Cookie.set('userSeq',res.data.customerSeq,{expires:1});     //把用户seq存到cookie
+             Cookie.set('token',res.data.etoken,{expires:10});     //把token存到cookie
+             Cookie.set('userSeq',res.data.customerSeq,{expires:10});     //把用户seq存到cookie
              let path = this.$route.query.redirect ? this.$route.query.redirect : '/home'
              this.$router.replace(path)  //登录成功后跳转到登录前的页面
              this.$dialog.toast({ mes:'登录成功'});

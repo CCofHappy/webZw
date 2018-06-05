@@ -140,7 +140,7 @@ export default new Router({
 					component: resolve => require(['../pages/user/mySale.vue'], resolve),
 					meta: {
 						title: '我的竞拍',
-						requireAuth: false
+						requireAuth: true
 					},
 				}
 
@@ -219,6 +219,16 @@ export default new Router({
 						requireAuth: true
 					}
 				},
+				// 订单详情    seq---订单seq
+				{
+					path: 'orderDetail/:seq',
+					name: 'orderDetail',
+					component: resolve => require(['../pages/auction/order/detail.vue'], resolve),
+					meta: {
+						title: '订单详情',
+						requireAuth: true
+					}
+				},
 
 			]
 		},
@@ -249,6 +259,15 @@ export default new Router({
 					component: resolve => require(['../components/text/auctionRule.vue'], resolve),
 					meta: {
 						title: '拍卖规则',
+						requireAuth: true
+					}
+				},
+				{
+					path: 'offlinePay',
+					name: 'offlinePay',
+					component: resolve => require(['../components/text/offlinePay.vue'], resolve),
+					meta: {
+						title: '线下支付',
 						requireAuth: true
 					}
 				},
@@ -330,7 +349,7 @@ export default new Router({
 			children: [{
 					path: '',
 					name: 'login',
-					component: resolve => require(['../pages/login/login.vue'], resolve),
+					component: resolve => require(['../pages/login/newLogin.vue'], resolve),
 					meta: {
 						title: '登录',
 						requireAuth: false
@@ -339,7 +358,7 @@ export default new Router({
 				{
 					path: 'register',
 					name: 'register',
-					component: resolve => require(['../pages/login/register.vue'], resolve),
+					component: resolve => require(['../pages/login/newRegister.vue'], resolve),
 					meta: {
 						title: '账号注册',
 						requireAuth: false
@@ -348,9 +367,18 @@ export default new Router({
 				{
 					path: 'replace',
 					name: 'replace',
-					component: resolve => require(['../pages/login/replace.vue'], resolve),
+					component: resolve => require(['../pages/login/forgetPassword.vue'], resolve),
 					meta: {
 						title: '重置密码',
+						requireAuth: false
+					}
+				},
+				{
+					path: 'userRegisterProtocol',
+					name: 'userRegisterProtocol',
+					component: resolve => require(['../components/text/userRegisterProtocol.vue'], resolve),
+					meta: {
+						title: '用户注册协议',
 						requireAuth: false
 					}
 				}
@@ -382,27 +410,65 @@ export default new Router({
 			children: [{
 				path: 'search',
 				name: 'search',
-				component: resolve => require(['../pages/mall/search/search.vue'], resolve)
+				component: resolve => require(['../pages/mall/search/search.vue'], resolve),
+				meta: {
+					title: '',
+					requireAuth: true
+				}
 			},
 			{
 				path: 'searchResult',
 				name: 'searchResult',
-				component: resolve => require(['../pages/mall/search/searchResult.vue'], resolve)
+				component: resolve => require(['../pages/mall/search/searchResult.vue'], resolve),
+				meta: {
+					title: '',
+					requireAuth: true
+				}
 			},
 			{
 				path: 'allMall',
 				name: 'allMall',
-				component: resolve => require(['../pages/mall/allMall.vue'], resolve)
+				component: resolve => require(['../pages/mall/allMall.vue'], resolve),
+				meta: {
+					title: '全部商品',
+					requireAuth: true
+				}
 			},
 			{
 				path: 'flashSale',
 				name: 'flashSale',
-				component: resolve => require(['../pages/mall/flashSale.vue'], resolve)
+				component: resolve => require(['../pages/mall/flashSale.vue'], resolve),
+				meta: {
+					title: '限时抢购',
+					requireAuth: true
+				}
 			},
 			{
 				path: 'mallDetails',
 				name: 'mallDetails',
-				component: resolve => require(['../pages/mall/mallDetails.vue'], resolve)
+				component: resolve => require(['../pages/mall/mallDetails.vue'], resolve),
+				meta: {
+					title: '商品详情',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'groupBuy',
+				name: 'groupBuy',
+				component: resolve => require(['../pages/mall/groupBuy.vue'], resolve),
+				meta: {
+					title: '拼团人数',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'shoppingBag',
+				name: 'shoppingBag',
+				component: resolve => require(['../pages/mall/shoppingBag.vue'], resolve),
+				meta: {
+					title: '购物袋',
+					requireAuth: true
+				}
 			}]
 		}
 		// 下面是嵌套路由、动态路由示例-------------------------------start

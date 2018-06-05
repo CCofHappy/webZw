@@ -23,7 +23,7 @@
                     </div>
                   </div>
                 </div>
-                <itemOrder :key="key" :item="item" :tab="tab"></itemOrder>
+                <itemOrder @validateOrder="getData" :key="key" :item="item" :tab="tab"></itemOrder>
               </div>
               </yd-radio-group>
               <!-- 数据全部加载完毕显示 -->
@@ -63,6 +63,7 @@
 
 <script>
 import itemOrder from './common/item'
+import { mapMutations } from 'vuex'
 export default {
  
   components: {
@@ -110,6 +111,9 @@ export default {
       
   },
   methods: {
+  	 ...mapMutations([
+           'setPayUrl'
+      ]),
   	  // 滚动加载
       loadListDown(tindex) {
           var tabIndex = tindex ? tindex : this.tab;
@@ -166,26 +170,31 @@ export default {
           })
           return false;
         }
-        this.api.paymentCheck()
+        this.api.paymentCheck({'auctionSessionStr':this.pending})
         .then((res) => {
           if(res.state){
-            this.router.push({
+          	// 把支付前地址存起来，用于三方支付完之后跳转
+          	this.$localStorage.set('payUrl',window.location.href);
+            this.$router.replace({
             	name:'checkout',
             	params:{Sseq:this.pending}
             })
           }else {
             this.$dialog.toast({
-              mes:res.data.message
+              mes:res.message
             })
           }
         })
+      },
+      getData(){
+      	this.loadListDown(0)
+        this.loadListDown(1)
+        this.loadListDown(2)
       }
   },
   mounted() {
       this.$nextTick(function(){
-        this.loadListDown(0)
-        this.loadListDown(1)
-        this.loadListDown(2)
+        this.getData()
       })
      this.$store.dispatch('getServerTime')
   },

@@ -11,7 +11,9 @@ window.Cookie = Cookie;
 window.md5 = md5;
 window.fly = new Fly;
 window.validForm = validForm   //全局验证方法
-window.bootRatio = 0.05;       //佣金比例
+Vue.prototype.bootRatio = 0.05;   //佣金比例
+Vue.prototype.servicePhone = '400-888-8888';   //客服电话号码
+//使用方法   :href="`tel:${servicePhone}`"
 Vue.prototype.configConst = config;
 fly.config.baseURL=config.wapApi
 // 请求拦截器-----------------------------------------------------------start
@@ -115,5 +117,10 @@ Vue.filter('replaceSG', function (value) {
 Vue.filter('phoneText', function (value) {
   if (!value) return ''
   value = value.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+  return value
+})
+Vue.filter('replaceTime', function (value) {
+  if (!value) return ''
+  value = value.substring(5,16);
   return value
 })

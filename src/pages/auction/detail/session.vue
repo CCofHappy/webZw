@@ -41,7 +41,7 @@
         </div>
     </yd-infinitescroll>
     <!-- 出价tab选项卡 -->
-    <bidden></bidden>
+    <bidden @myEvent="biddenCB"></bidden>
     <!-- 私洽弹窗 -->
     <negotiate></negotiate>
   </div>
@@ -90,8 +90,8 @@ export default {
           if(res.state == 1){
               this.session = res.data.session;
               const _list = res.data.showAuction.dataList;
-              this.$store.dispatch('getServerTime')
               this.list = [...this.list, ..._list];
+              this.$store.dispatch('getServerTime');
               // 当最后一页的数据少于一页的数据或者页数等于后台返回的总页数时，就是全部加载完毕
               if (_list.length < this.postData.rows || this.postData.page >= res.data.pageCount) {
                   // 所有数据加载完毕
@@ -103,9 +103,14 @@ export default {
           }
 
        })
-
-
       },
+      //出价后的回调函数
+      biddenCB(){
+      	this.postData.page = 1;
+      	this.list = [];
+      	this.loadListDown()
+      }
+      
   },
   mounted() {
    this.$nextTick(function(){

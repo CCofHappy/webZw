@@ -1,8 +1,6 @@
 <template>
   <div style="padding-bottom: 1.4rem;">
-    <transition name="fade">
-      <loading v-if="Vloading"></loading>
-    </transition>
+     
     <div v-if="Number(this.$localStorage.get('client'))">
       <yd-navbar :fixed="true" class="text-center">
         <img slot="center" src="@/assets/logo-txt.png" style="width: 1.6rem;height: auto;">
@@ -119,7 +117,6 @@ import bannerb from '@/components/banner/banner-b.vue'
 import bannerc from '@/components/banner/banner-c.vue'
 import bannerd from '@/components/banner/banner-d.vue'
 import goods from '@/components/lists/Lists.vue'
-import loading from '@/components/common/loading.vue'
 export default {
   name: 'home',
   components: {
@@ -128,11 +125,9 @@ export default {
         bannerc,
         bannerd,
         goods,
-        loading
     },
   data () {
     return {
-       Vloading:true,
        bannerData1:[],
        bannerData2:[],
        bannerData3:[],
@@ -156,9 +151,7 @@ export default {
     next()
   },
   mounted() {
-    
-  
-   this.Vloading = true;
+   this.$store.commit('setLoading',true);
    fly.all([
       this.api.getData(), 
       this.api.history(), 
@@ -176,9 +169,9 @@ export default {
        }
        this.serverTime = serverTime;
        setTimeout(()=>{
-         this.Vloading = false;
          this.$nextTick(function () {
-          window.scroll(0,this.recruitScrollY)
+          window.scroll(0,this.recruitScrollY);
+           this.$store.commit('setLoading',false);
         });
        },500)
     }))

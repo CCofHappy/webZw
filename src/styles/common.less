@@ -1,5 +1,5 @@
 // 1rem = 50px;    设计图纸375px
-@import url('//at.alicdn.com/t/font_674763_yeuks2xw4dvx6r.css');
+@import url('//at.alicdn.com/t/font_674763_b4rd26isvm7mygb9.css');
 .iconfont {
   position: relative;
   font-size: 0.32rem;
@@ -75,6 +75,7 @@ body {
 .margin-top-xs{margin-top:.1rem !important}
 .margin-left-lg{margin-left:1rem !important}
 .margin-left-md{margin-left:.4rem !important}
+.margin-left-12{margin-left:.24rem !important}
 .margin-left-sm{margin-left:.2rem !important}
 .margin-left-xs{margin-left:.1rem !important}
 .margin-right-lg{margin-right:1rem !important}
@@ -96,6 +97,7 @@ body {
 .padding-top-0{padding-top: 0 !important}
 .padding-bottom-0{padding-bottom: 0 !important}
 .padding-top-lg{padding-top:1rem !important}
+.padding-top-40{padding-top:.8rem !important}
 .padding-top-md{padding-top:.4rem !important}
 .padding-top-sm{padding-top:.2rem !important}
 .padding-top-xs{padding-top:.1rem !important}
@@ -180,29 +182,38 @@ body {
 }
 // 字体大小
  .fs10 {
-  font-size: .2rem;
+  font-size: .2rem !important;
 }
 .fs12 {
-  font-size: .24rem;
+  font-size: .24rem !important;
 }
 .fs14 {
-  font-size: .28rem;
+  font-size: .28rem !important;
 }
 .fs16 {
-  font-size: .32rem;
+  font-size: .32rem !important;
 }
 .fs18 {
-  font-size: .36rem;
+  font-size: .36rem !important;
 }
 .fs20 {
-  font-size: .4rem;
+  font-size: .4rem !important;
 }
 .fw600{
   font-weight: 600;
 }
+.fw500{
+  font-weight: 500;
+}
+.fw200{
+  font-weight: 200;
+}
 //深灰
 .dgray {
   color: #282828;
+}
+.grayd {
+  color: #979797;
 }
 /*灰色*/
 .gray {
@@ -238,6 +249,10 @@ body {
 .white {
   color: #FFFFFF;
 }
+//绿
+.green {
+    color: #589A0D;
+}
 
 //常用图片大小
 .imgSize50{
@@ -268,12 +283,12 @@ body {
 }
 // 最多显示两行，超出显示省略号
 .text2row{
-   text-overflow: -o-ellipsis-lastline;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 2;
-   -webkit-box-orient: vertical;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: initial;
 }
 // 字体居顶
 .text-top{
@@ -281,6 +296,7 @@ body {
 }
 // 字体居中
 .text-middle{
+  display: table-cell;
   vertical-align: middle;
 }
 /*字母全转大写*/
@@ -353,6 +369,10 @@ body {
     bottom: 0;
     width: 100%;
     z-index: 999;
+    .sky-btn-orange {
+        border: none;
+        border-radius: 0;
+    }
 }
 /*   底部固定块级按钮
 <footer class="footerFixed">
@@ -433,6 +453,10 @@ body {
   margin: 0 auto;
   display: block;
 }
+.yd-btn.sky-btn-xs {
+  height: .7rem;
+  width: 1.4rem;
+}
 .yd-btn.sky-btn-richmd {
   height: 1rem;
   width: 3rem;
@@ -504,6 +528,23 @@ transform: translate(-30px, 0);
         opacity: 1; /*结尾状态 透明度为1*/  
     }  
 }  
+@-webkit-keyframes fadeOut {  
+    0% {  
+    opacity: 1; 
+    }  
+    20%{  
+        opacity: .7;  
+    }  
+    50% {  
+        opacity: .5; 
+    }  
+    70%{  
+        opacity: .2;  
+    }  
+    100% {  
+        opacity: 0; 
+    }  
+} 
 .fadeIn05s {
     /*调用动画效果*/  
   -webkit-animation-name: fadeIn; /*动画名称*/  
@@ -511,7 +552,13 @@ transform: translate(-30px, 0);
   -webkit-animation-iteration-count: 1; /*动画次数*/  
   -webkit-animation-delay: 0s; /*延迟时间*/  
 }
-
+.fadeOut05s {
+    /*调用动画效果*/  
+  -webkit-animation-name: fadeOut; /*动画名称*/  
+  -webkit-animation-duration: .5s; /*动画持续时间*/  
+  -webkit-animation-iteration-count: 1; /*动画次数*/  
+  -webkit-animation-delay: 0s; /*延迟时间*/  
+}
 /*价格    ￥1300*/
 .priceNum{
     color: #C93B00;
@@ -1008,7 +1055,7 @@ font-size: .4rem;
   height: .3rem;
   background:#FFFFFF;
   position: absolute;
-  top: .1rem;
+  top: .06rem;
   left: .05rem;
   z-index: -1;
   border-radius: 100%;
@@ -1028,6 +1075,8 @@ font-size: .4rem;
   margin-top: 2rem;
  }
 }
+
+.segmentation { height: .2rem;background-color: #F2F2F2; }
 
 .detailsFooter {
     border: 1px solid #F4F4F4;
@@ -1058,6 +1107,11 @@ font-size: .4rem;
       font-size: .32rem;
     }
  }
+
+.halvingLine1 {
+  height: 1px;
+  background-color: #F2F2F2;
+}
 
 .inputBox {
   margin-left: -0.3rem;

@@ -1,8 +1,5 @@
 <template>
   <div class="bggray">
-    <transition name="fade">
-      <loading v-if="Vloading"></loading>
-    </transition>
       <titleHead :bg="'#F7F7F7'" :fixed="true"></titleHead>
       <yd-pullrefresh class="scroll scroll-a" :callback="loadListUp" ref="prdemo">
         <yd-infinitescroll :callback="loadListDown" ref="ls">
@@ -24,13 +21,11 @@
 import titleHead from '@/components/common/Title/Thead.vue'
 import itemscroll from '@/components/lists/Itemscroll.vue'
 import scrolLoading from '@/components/common/scrolLoading'
-import loading from '@/components/common/loading.vue'
 export default {
   components: {
       titleHead,
       itemscroll,
       scrolLoading,
-      loading
     },
   data () {
     return {
@@ -48,9 +43,10 @@ export default {
       serverTime () {
         return this.$store.state.server.serverTime
       },
-      listScrollY(){
-        return this.$store.state.position.listScrollY;
-      }
+ 			//记录上次这个页面滚动的高度和加载到第几页的数据
+      scrollList(){
+        return this.$store.state.position.scrollList;
+      },
   },
   methods: {
  
@@ -78,10 +74,6 @@ export default {
                 this.$store.dispatch('getServerTime')
                 const _list = res.data.dataList;
                 this.list = [...this.list, ..._list];
-                this.$nextTick(function () {
-                  window.scroll(0,this.listScrollY)
-                  setTimeout(()=>{this.Vloading = false;},500)
-                });
                 // 当最后一页的数据少于一页的数据或者页数等于后台返回的总页数时，就是全部加载完毕
                 if (_list.length < this.postData.rows || this.postData.page >= res.data.pageCount) {
                     // 所有数据加载完毕
@@ -94,6 +86,25 @@ export default {
            })
           
         },
+        //初始化页面(无限加载的场景)（如果页数不多的场景，可以直接只存高度，然后进行滚动触发）
+        getData(){
+         	if(this.scrollList.scrollTop) {
+         			this.postData.rows = this.scrollList.page*10;
+         	}
+         	 fly.post(this.postUrl,this.postData)
+     		  .then((res) => {
+     		  	this.list = res.data.dataList;
+     		  	this.$nextTick(()=>{
+     		  		window.scroll(0,this.scrollList.scrollTop);
+     		  		//滚动到指定高度后，要还原请求参数
+     		  		this.postData.page = this.scrollList.page + 1;
+     		  		this.postData.rows = 10;
+     		  		//加载完后要初始化vuex的数据
+ 		  		  	this.$store.commit('initScrollList');
+     		  	})
+     		  })
+        }
+        
   },
   mounted() {
      // 判断是哪种列表，通过路由name来对应加载不同的数据
@@ -111,10 +122,8 @@ export default {
       default:
       this.$router.push({name:'error'})
     }
-    this.$nextTick(function(){
-        this.loadListDown()
-    })
-   this.$store.dispatch('getServerTime')
+    this.getData()
+    this.$store.dispatch('getServerTime')
   },
   watch: {
     $route() {
@@ -122,8 +131,13 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
+  	//离开页面之前记录好滚动到第几页和滚动高度
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-    this.$store.commit('elist',scrollTop)
+    var scroll = {
+    	page:this.postData.page,
+    	scrollTop:scrollTop
+    }
+    this.$store.commit('setScrollList',scroll);
     next()
   },
 }

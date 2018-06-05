@@ -4,19 +4,18 @@
       <div class="list-child padding-left-md">
       	<img class="imgSize50 pull-left" src="../../assets/default/jiu2.jpg" />
       	<div class="margin-left-md" style="display: inline-block;">
-      		<p><span class="gray">物流公司：</span>{{info.expressChina}}</p>
-      		<p class="margin-top-sm"><span class="gray">物流编号：</span>{{info.expressNumber}}</p>
+      		<p><span class="gray">物流公司：</span>{{info.expressChina ? info.expressChina : '正在出库中' }}</p>
+      		<p class="margin-top-sm"><span class="gray">物流编号：</span>{{info.expressNumber ? info.expressNumber : '正在出库中' }}</p>
       	</div>
       </div>
      <yd-timeline class="sky-timeline-l margin-top-md">
      		<yd-timeline-item v-for="item,key in data" :key="key" :class="[key == 0 ? 'greend' : 'grayd']">
      				<p v-if="key==0" class="fs16">已签收</p>
-     				<p v-if="key==data.length && data.length > 1" class="fs16">已揽件</p>
-            <p class="fs12 margin-top-sm">{{item.conText}}</p>
-            <time class="ftime">{{item.ftime}}</time>
+     				<p v-if="key+1 == data.length && data.length > 1" class="fs16">已揽件</p>
+            <p class="fs12">{{item.conText}}</p>
+            <time class="ftime">{{item.ftime | replaceTime}}</time>
             <i slot="icon" class="iconfont icon-Slice10"></i>
         </yd-timeline-item>
- 
         <yd-timeline-item class="grayd" v-if="data.length == 1">
      				<p class="fs16">已揽件</p>
             <i slot="icon" class="iconfont icon-Slice10"></i>
@@ -82,5 +81,8 @@ export default {
     white-space: normal;
     word-wrap: break-word;
     width: 1rem;
+ }
+ .grayd .ftime {
+ 	 top: .3rem;
  }
 </style>

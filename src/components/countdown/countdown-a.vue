@@ -48,12 +48,7 @@ export default {
       }
     },
     endUpdate() {
-      if (this.timeState == '距开始') {
-        this.timeData = (this.endDate - this.serverTime)/1000;
-        this.timeState = '距结束'
-      } else {
-        
-      }
+      this.$emit('endCallback')
     }
   }, 
   mounted() {

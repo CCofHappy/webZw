@@ -98,9 +98,20 @@ const api = {
 	   customerSeq      用户序号
 	   price           出价价格
 	   highestPrice    最高价，如果是自由出价没有设置心理价就传0
+	   "offerType":"0",   默认传0，暂时不知道为什么
+	   signNo   ---  叫价记录里的编号
 	*/
 	raisePrice: function(postData) {
 		return fly.post('/app/auction/raisePrice', postData);
+	},
+	/*获取当前拍品的最高叫价和最新拍卖信息(叫价前要请求一次)
+	入参：
+	   auctionGoodsSeq    拍品序号
+	   auctionSessionSeq  拍场序号
+	   customerSeq      用户序号
+	*/
+	getHighestPrice: function(postData){
+		return fly.post('/app/person/getHighestPrice', postData);
 	},
 	/*洽谈
 	入参：
@@ -282,6 +293,13 @@ const api = {
 	   */
 	findByDeliveryAddr: function(deliveryAddrSeq) {
 		return fly.post(`/app/person/findByDeliveryAddr/${deliveryAddrSeq}`);
+	},
+	/* 	确认收货
+	   入参：
+		订单seq
+	   */
+	validateOrder: function(seq) {
+		return fly.post(`/app/person/validateOrder/${seq}`);
 	},
 	
 	

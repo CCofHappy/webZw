@@ -113,7 +113,7 @@
 							customerSeq: Cookie.get('userSeq'),
 							page: 1,
 							rows: 10,
-							states: '3,4',
+							states: '4,5',
 							condition: '',
 							searchTrim: ''
 						},

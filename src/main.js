@@ -17,6 +17,13 @@ import 'swiper/dist/css/swiper.css' //引入swiper滑块样式
 // import './styles/index.css'
 import './styles/common.less'
 import './styles/init.less'
+import { Popup, Indicator, IndexList, IndexSection, Cell } from 'mint-ui'
+  
+import 'mint-ui/lib/style.css'
+Vue.component(Popup.name, Popup);
+Vue.component(IndexList.name, IndexList);
+Vue.component(IndexSection.name, IndexSection);
+Vue.component(Cell.name, Cell);
 Vue.use(Radio);
 Vue.component(Radio.name, Radio);
 Vue.use(VueAwesomeSwiper);
@@ -24,6 +31,7 @@ Vue.use(VeeValidate,Veeconfig);
 Vue.use(VueLocalStorage)
 Vue.config.productionTip = false
 Vue.prototype.api = api;
+Vue.prototype.loadingMint = Indicator;
 // ajax请求
 Vue.prototype.ajaxPost = function(url,postData,callback){
   fly.post(url,postData)

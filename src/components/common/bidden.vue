@@ -62,10 +62,11 @@ export default {
       biddenData: state => state.Data.biddenData,
       biddenName:state => state.Data.biddenData.auctionGoodsName || ' ',     //拍品名字
       biddenImg:state => state.Data.biddenData.auctionGoodsIcon || ' ',      //拍品图片
-      currPrice:state => parseInt(state.Data.biddenData.currPrice) || 1,               //当前价
-      unitBidden:state => state.Data.biddenData.jiaJiaStep || 1,            //加价幅度
+      currPrice:state => parseInt(state.Data.biddenData.lastPrice) || 1,               //当前价
+      unitBidden:state => parseInt(state.Data.biddenData.jiaJiaStep) || 1,            //加价幅度
       auctionGoodsSeq:state => state.Data.biddenData.auctionGoodsSeq || 1,          //拍品序号
       auctionSessionSeq:state => state.Data.biddenData.auctionSessionSeq || 1,    //拍场序号
+      signNo:state => state.Data.biddenData.signNo || 1,    //拍卖者编号
     })
   },
   methods: {
@@ -82,7 +83,9 @@ export default {
                 auctionSessionSeq: this.auctionSessionSeq,
                 customerSeq: this.userSeq,
                 price:this.biddenIng,
-                highestPrice:0
+                highestPrice:0,
+                signNo:this.signNo,
+                offerType:"0"
             }
         }else {
             postData = {
@@ -90,18 +93,16 @@ export default {
                 auctionSessionSeq: this.auctionSessionSeq,
                 customerSeq: this.userSeq,
                 price:this.currPrice + this.unitBidden,
-                highestPrice:this.biddenMax
+                highestPrice:this.biddenMax,
+                signNo:this.signNo,
+                offerType:"0"
             }
         }
         this.api.raisePrice(postData)
         .then((res) => {
           if(res.state){
                 this.$dialog.toast({mes: res.message, timeout: 1000});
-                setTimeout(()=>{window.location.reload()},1000);
-                // this.$parent.postData.page = 1; 
-                // this.$parent.list = [];
-                // this.$parent.loadListDown()
-                // this.successBidden(postData) 
+                this.$emit('myEvent')
             }else {
                 this.$dialog.toast({mes: res.message, timeout: 1000});
             }
