@@ -7,7 +7,7 @@
         <yd-tabbar-item title="商城" link="/mall" :active="$route.name =='mall'">
             <i slot="icon" class="iconfont icon-Slicex3"></i>
         </yd-tabbar-item>
-         <yd-tabbar-item title="社区" link="#">
+         <yd-tabbar-item title="社区" link="/community" :active="$route.name =='community'">
             <i slot="icon" class="iconfont icon-Slicex1"></i>
         </yd-tabbar-item>
         <yd-tabbar-item title="资讯" link="#">

@@ -4,7 +4,7 @@ import App from './App'
 import router from './router'       
 import store from '@/store'         
 import YDUI from 'vue-ydui' 
-import { Radio } from 'element-ui';
+import { Radio, Dropdown,DropdownMenu,DropdownItem,} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueLazyload from 'vue-lazyload'  
 // import FastClick from 'fastclick'     //解决点击事件延迟问题
@@ -25,7 +25,10 @@ Vue.component(IndexList.name, IndexList);
 Vue.component(IndexSection.name, IndexSection);
 Vue.component(Cell.name, Cell);
 Vue.use(Radio);
-Vue.component(Radio.name, Radio);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
+ 
 Vue.use(VueAwesomeSwiper);
 Vue.use(VeeValidate,Veeconfig);
 Vue.use(VueLocalStorage)

@@ -25,6 +25,16 @@ export default new Router({
 					}
 				},
 				{
+					path: 'community',
+					name: 'community',
+					component: resolve => require(['../pages/community/community.vue'], resolve),
+					meta: {
+						title: '社区',
+						requireAuth: false,
+						keepAlive: false
+					}
+				},
+				{
 					path: 'user',
 					name: 'user',
 					component: resolve => require(['../pages/user/user.vue'], resolve),
@@ -467,6 +477,60 @@ export default new Router({
 				component: resolve => require(['../pages/mall/shoppingBag.vue'], resolve),
 				meta: {
 					title: '购物袋',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'rockResult',
+				name: 'rockResult',
+				component: resolve => require(['../pages/mall/rockResult.vue'], resolve),
+				meta: {
+					title: '摇号结果',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'mallOrder',
+				name: 'mallOrder',
+				component: resolve => require(['../pages/mall/mallOrder/mallOrder.vue'], resolve),
+				meta: {
+					title: '商城订单',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'mallOrderDetail',
+				name: 'mallOrderDetail',
+				component: resolve => require(['../pages/mall/mallOrder/mallOrderDetail.vue'], resolve),
+				meta: {
+					title: '订单详情',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'afterSaleServe',
+				name: 'afterSaleServe',
+				component: resolve => require(['../pages/mall/mallOrder/afterSaleServe.vue'], resolve),
+				meta: {
+					title: '售后服务',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'applyRefund',
+				name: 'applyRefund',
+				component: resolve => require(['../pages/mall/mallOrder/applyRefund.vue'], resolve),
+				meta: {
+					title: '申请退款',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'refundDetail',
+				name: 'refundDetail',
+				component: resolve => require(['../pages/mall/mallOrder/refundDetail.vue'], resolve),
+				meta: {
+					title: '退款详情',
 					requireAuth: true
 				}
 			}]

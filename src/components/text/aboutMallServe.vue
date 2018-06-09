@@ -2,7 +2,7 @@
 remarkType 取值为contentData的下标
 0代表 中威网服务
 1代表 拼团规则
-
+2代表 摇号规则
 
  -->
 
@@ -14,17 +14,6 @@ remarkType 取值为contentData的下标
     		<p class="padding-top-40 contentTitle fs16">{{item.title}}</p>
     		<pre class="fs14 content" :class="{lastContent: key==(contentData[remarkType].contentDetail.length-1)}">{{item.detail}}</pre>
     	</div>
-    	
-    	<!-- <p class="padding-top-40 contentTitle fs16">破损包赔</p>
-    	<pre class="fs14 content">成交后，如果因运输不当造成的破损，中威网承担全部损失。因为酒的特殊性，运输过程中可能会造成轻微漏酒，属正常现象，漏酒在5%以内，中威网不承担责任，超出5%时，客户有权退货。</pre>
-    	<p class="padding-top-40 contentTitle fs16">7天退换</p>
-    	<pre class="fs14 content">商品自签收次日起7天内无理由退货。
-限时抢购、预售、拼团、摇号不支持7天无理由退换货。</pre>
-    	<p class="padding-top-40 contentTitle fs16">满300包邮</p>
-    	<pre class="fs14 content lastContent">广东省内15元/单；广东省外25元/单（不限重）。
-订单满300国内包邮。
-暂不支持港澳台及海外订单。
-</pre> -->
     </div>
 
 </template>

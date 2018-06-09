@@ -2,7 +2,7 @@
 <template>
 	<div>
 		<titleHead :fixed="true" :bg="'#F7F7F7'"></titleHead>
-		<div class="my-sale-box">
+		<div class="my-sale-box" :class="Number(this.$localStorage.get('client')) ? '' : 'top0'">
 			<div class="sequence padding-top-sm" v-if="!searchShow">
 				<span @click="show = true">{{condition}} <i class="iconfont icon-xiangxia"></i></span>
 				<span @click="searchShow = true" class="pull-right" style="margin-top: .05rem;">

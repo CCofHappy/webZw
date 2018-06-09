@@ -1,5 +1,5 @@
 // 1rem = 50px;    设计图纸375px
-@import url('//at.alicdn.com/t/font_674763_b4rd26isvm7mygb9.css');
+@import url('//at.alicdn.com/t/font_674763_u0q69gd2th0bpgb9.css');
 .iconfont {
   position: relative;
   font-size: 0.32rem;
@@ -187,6 +187,9 @@ body {
 .fs12 {
   font-size: .24rem !important;
 }
+.fs13 {
+  font-size: .26rem !important;
+}
 .fs14 {
   font-size: .28rem !important;
 }
@@ -255,6 +258,10 @@ body {
 }
 
 //常用图片大小
+.imgSize40{
+    width: .8rem;
+    height: .8rem;
+}
 .imgSize50{
     width: 1rem;
     height: 1rem;
@@ -293,6 +300,7 @@ body {
 // 字体居顶
 .text-top{
   vertical-align: text-top;
+  display: table-cell;
 }
 // 字体居中
 .text-middle{
@@ -1008,7 +1016,17 @@ transform: translate(-30px, 0);
      border-right: 4px solid #FFFFFF;
   }
 }
-
+.top0 {
+    .yd-tab-nav {
+        top: 0 !important;
+    }
+    .sequence {
+        top: .8rem;
+    }
+    .yd-tab-panel {
+ 
+    }
+}
 
 //物流跟踪
 .sky-timeline-l {
@@ -1022,8 +1040,46 @@ transform: translate(-30px, 0);
     
 }
 
-
-
+//社区
+.communityTab {
+   .yd-tab-nav-nomal {
+       background: #F8F8F8;
+       .yd-tab-nav-item:not(:last-child):after {
+           border: none;
+       }
+       .yd-tab-nav:after {
+           border: none;
+       }
+       .yd-tab-nav-item>a {
+           .fs16;
+           .fw600;
+       }
+       .yd-tab-nav-item:nth-child(3),.yd-tab-nav-item:nth-child(4){
+           display: none;
+       }
+       .yd-tab-nav{
+         width: 3.2rem !important;
+         .yd-tab-nav-item {
+            background: #F8F8F8; 
+         }
+         .yd-tab-active:before {
+              width: 30%;
+              margin-left: -15%; 
+              height: 3px;
+           }
+       }
+   }
+}
+//等级标签
+.level {
+    position: relative;
+    font-size: .2rem;
+    display: inline-block;
+    color: #FFFFFF;
+    background: #F4A528;
+    padding: 2px 3px 1px 3px;
+    transform:scale(0.8);
+}
 
 // 弹窗（中间弹出）
 
@@ -1075,8 +1131,10 @@ font-size: .4rem;
   margin-top: 2rem;
  }
 }
-
+// 间隔条 10px
 .segmentation { height: .2rem;background-color: #F2F2F2; }
+// 间隔条 1px
+.segmentation1 { height: 1px;background-color: #F2F2F2; }
 
 .detailsFooter {
     border: 1px solid #F4F4F4;

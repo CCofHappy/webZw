@@ -3,23 +3,14 @@
 	<div>
 		<yd-navbar title="全部商品" bgcolor="#F8F8F8" fontsize=".36rem" color="#282828" :fixed="true">
 	        <router-link :to="{name:'mall'}" slot="left">
-	            <yd-navbar-back-icon></yd-navbar-back-icon>
+	            <!-- <yd-navbar-back-icon></yd-navbar-back-icon> -->
+	            <span class="iconfont icon-Slicex9 fs20"></span>
 	        </router-link>
 	    </yd-navbar>
-    	<div class="flex-align-center" style="width: 100%; height: .88rem; background-color: #F8F8F8; display: flex;flex-direction: row; margin-top: .88rem;">
-			<div class="flex-1">
-				<yd-button style="color: #CD733B;padding-left: .44rem;" type="hollow" class="iconfont">默认排序</yd-button>
-			</div>
-			<div class="flex-1 text-center">
-				<yd-button type="hollow" class="iconfont">价格</yd-button>
-				<i class="iconfont icon-Slicex10"></i>
-			</div>
-			<div class="flex-1 text-right padding-right-sm">
-				<yd-button type="hollow" class="iconfont">筛选</yd-button>
-				<i class="iconfont">&#xe65a;</i>
-			</div>
+    	<div class="flex-align-center" style="width: 100%; height: .88rem; background-color: #F8F8F8; margin-top: .88rem;">
+			<sort-combo-box @callBack="sortComboBoxEvent"></sort-combo-box>
 		</div>
-		<div style="">
+		<div style="margin-top: .24rem;">
 			<yd-list theme="3">
 				<commodity-list v-for="item,key in list" :itemData="item" :key="key"></commodity-list>
 			</yd-list>
@@ -30,6 +21,7 @@
 
 <script>
 	import commodityList from "@/components/lists/commodityList"
+	import sortComboBox from "./mallPublic/sortComboBox"
 	export default {
 		name: 'allMall',
 		data() {
@@ -48,7 +40,13 @@
 			}
 		},
 		components: {
-			commodityList
+			commodityList,
+			sortComboBox
+		},
+		methods: {
+			sortComboBoxEvent(status) {
+				console.log(status);
+			}
 		}
 	}
 </script>
@@ -64,7 +62,7 @@
 		border: 0px;
 	}
 	.navbar-bottom-line-color:after {
-	  border-color: #F8F8F8;
+	    border-color: #F8F8F8;
 	}
 </style>
 

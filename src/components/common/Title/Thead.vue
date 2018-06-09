@@ -5,6 +5,7 @@
           <yd-navbar-back-icon @click.native="$router.go(-1)"></yd-navbar-back-icon>
         </a>
     </yd-navbar>
+    <div style="height: 1rem;"></div>
   </div>
 </template>
 

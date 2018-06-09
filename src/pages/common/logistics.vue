@@ -4,8 +4,8 @@
       <div class="list-child padding-left-md">
       	<img class="imgSize50 pull-left" src="../../assets/default/jiu2.jpg" />
       	<div class="margin-left-md" style="display: inline-block;">
-      		<p><span class="gray">物流公司：</span>{{info.expressChina ? info.expressChina : '正在出库中' }}</p>
-      		<p class="margin-top-sm"><span class="gray">物流编号：</span>{{info.expressNumber ? info.expressNumber : '正在出库中' }}</p>
+      		<p><span class="gray">物流公司：</span><span v-if="info">{{info.expressChina}}</span><span class="gray" v-else>正在出库中</span></p>
+      		<p class="margin-top-sm"><span class="gray">物流编号：</span><span  v-if="info">{{info.expressNumber}}</span><span class="gray" v-else>正在出库中</span></p>
       	</div>
       </div>
      <yd-timeline class="sky-timeline-l margin-top-md">

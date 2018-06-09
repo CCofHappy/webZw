@@ -4,28 +4,12 @@
 		<div class="searchNav">
 			<yd-input class="searchInput" v-model="input1" placeholder="请输入关键字"></yd-input>
 			<yd-button type="hollow" class="iconfont navCancleBtn" @click.native="goBackSearch">取消</yd-button>
-			<div style="margin-top: 1rem;width: 100%; background-color: #F8F8F8; display: flex;flex-direction: row;">
-				<div class="flex-1 leftBtn">
-					<yd-button type="hollow" class="iconfont" :style="sortType==0?{color: '#CD733B'}:{color:'#282828'}" @click.native="clickSore(0)">默认排序</yd-button>
-				</div>
-				<div class="flex-1 text-center centerBtn">
-					<yd-button type="hollow" class="iconfont" @click.native="clickSore(1)">价格</yd-button>
- 					<div style="display:inline-block; position: relative;">
-						<i class="iconfont icon-paixujiantoushang-copy" :style="sortType==1?{color: '#CD733B'}:{color:'#282828'}"></i>
-						<i class="iconfont icon-paixujiantouxia-copy rightIcon" :style="sortType==2?{color: '#CD733B'}:{color:'#282828'}"></i>
-					</div>
-				</div>
-				<div class="flex-1 text-right padding-right-sm rightBtn">
-					<yd-button type="hollow" class="iconfont" @click.native="clickFiltrate">筛选</yd-button>
-					<i class="iconfont icon-iconfontzhizuobiaozhun023125"></i>
-				</div>
+			<div style="margin-top: 1rem;width: 100%; background-color: #F8F8F8;">
+				<sort-combo-box @callBack="sortComboBoxEvent"></sort-combo-box>
 			</div>
 			
 		</div>
-		<div style="margin-top: .88rem;width: 100%; background-color: #F8F8F8;">
-			
-		</div>
-		<div style="margin-top: 1.88rem;">
+		<div style="margin-top: 2.28rem;">
 			<yd-list theme="3">
 				<commodity-list v-for="item,key in list" :itemData="item" :key="key"></commodity-list>
 			</yd-list>
@@ -82,6 +66,7 @@
 <script>
 	import commodityList from "@/components/lists/commodityList"
 	import filtrate from "./filtrate"
+	import sortComboBox from "../mallPublic/sortComboBox"
 
 	export default {
 		data () {
@@ -103,7 +88,8 @@
 		},
 		components: {
 			commodityList,
-			filtrate
+			filtrate,
+			sortComboBox
 		},
 		methods: {
 			clickFiltrate() {
@@ -112,21 +98,13 @@
 			goBackSearch() {
 				this.$router.push({name: "search"});
 			},
-			clickSore(sortType) {
-				if (sortType == 0) {
-					this.sortType = 0;
-				} else {
-					if (this.sortType == 0) {
-						this.sortType = 1;
-					} else if (this.sortType == 1) {
-						this.sortType = 2;
-					} else {
-						this.sortType = 1;
-					}
-				}
-			},
 			filtrateCallBack(status) {
 				this.isMore = true;
+			},
+			sortComboBoxEvent(status) {
+				if (status == "clickFiltrate") {
+					this.show4 = true;
+				}
 			}
 		},
 		mounted: function () {
@@ -146,7 +124,7 @@
 		top: 0px;
 		height: 1.88rem;
 		width: 100%;
-		font-size: 14px;
+		font-size: .28rem;
 	}
 	.searchInput {
 		position: absolute;
@@ -155,7 +133,7 @@
 		top: .1rem;
 		height: .68rem;
 		right: 1.04rem;
-		input {padding-left: 10px;}
+		input {padding-left: .2rem;}
 	}
 
 	.yd-input {

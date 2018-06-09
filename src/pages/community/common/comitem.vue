@@ -1,0 +1,162 @@
+<template>
+  <div class="itembox">
+  	<header class="clearfix">
+  		<img class="itemImg" :src="item.customerImgUrl">
+  		<div class="pull-left">
+  			<p class="fs16">
+  				{{item.name}}
+  				<span class="level margin-left-xs" style="top: -2px;">Lv.{{item.level}}</span>
+  				<img v-if="item.v" class="vlabel"  src="@/assets/label/v.png" />
+  			</p>
+  			<p class="fs12 grayd margin-top-xs">{{formtDate(item.createTime,4)}}</p>
+  		</div>
+  		<yd-button v-if="item.isFollow" type="hollow" class="pull-right sky-btn fs13" color="#979797">已关注</yd-button>
+  	 	<yd-button v-else class="pull-right sky-btn sky-btn-fred fs13"  type="hollow" @click.native="follow"><i class="iconfont icon-plus-add fs12" style="top: -1px;"></i> 关注</yd-button>
+  	</header>
+  	<div class="main">
+  		<p class="title">
+  			<span v-for='label in item.label' class="fs10">
+  				<span v-if="label.name != '精'" class="label">
+	  				{{label.name}}
+	  			</span>
+	  			<i v-else class="iconfont icon-CombinedShape" style="top: 0; color: #C93B00;"></i>
+  			</span>
+  			
+  			<span class="fs18 fw600">{{item.title}}</span>
+  		</p>
+  		<p class="content">
+  			{{item.content}}
+  		</p>
+  			<yd-lightbox class="imgBox">
+	        <yd-lightbox-img v-for="img, key in item.imgUrl" :key="key" :src="img.url"></yd-lightbox-img>
+	    </yd-lightbox>
+  	</div>
+  	<footer class="footer">
+  		<span class="grayd fs12">{{item.scanCount ? item.scanCount : 0}}次浏览</span>
+  		<p class="pull-right">
+  			<span class="margin-right-lg"><i class="iconfont icon--information"></i> {{item.replyCount}}</span>
+  			<!--是否点赞过-->
+  			<span class="margin-right-lg" v-if="item.isPraise" ><img src="@/assets/label/praise.png" style="width: 0.3rem;" /> {{item.praise}}</span>
+  			<span class="margin-right-lg" v-else  @click="praise"><img src="@/assets/label/noPraise.png" style="width: 0.3rem;" /> {{item.praise}}</span>
+  			<span><i class="iconfont icon--money"></i> {{item.uCount}}</span>
+  		</p>
+  	</footer>
+  </div>
+</template>
+
+<script>
+export default {
+	props: ['item','type'],    //type---帖子类型 1：分享帖，2：酒评贴，3交流贴
+  components: {
+  	
+    },
+  data () {
+    return {
+      
+    }
+  },
+  computed: {
+      
+  },
+  methods: {
+  	//点赞
+  	praise(){
+  		this.api.insertPostPraise({
+  			pid:this.item.pid,
+  			uid:Cookie.get('userSeq'),
+  			type:this.type
+  		})
+  		.then((res) => {
+  			if(res.state){
+  				this.item.isPraise = 1;
+  				this.item.praise++;
+  			}
+  		})
+  	},
+//	关注
+		follow(){
+			this.api.follow({
+				followUid:this.item.uid,
+  			uid:Cookie.get('userSeq'),
+			})
+			.then((res) => {
+  			if(res.state){
+  				this.$emit('getData');
+  			}
+  		})
+		}
+  },
+  mounted() {
+     
+  },
+  watch: {
+    $route() {
+       
+    }
+  }
+}
+</script>
+
+<style scoped lang="less">
+ .itembox {
+ 	padding: .6rem .24rem .4rem .24rem;
+ }
+ .itemImg {
+ 	float: left;
+ 	width: .8rem;
+ 	height: .8rem;
+ 	border-radius: 100%;
+ 	margin-left: .1rem;
+ 	margin-right: .3rem;
+ }
+ .main {
+ 	margin-top: .6rem;
+ 	.title {
+			display:block;
+		  white-space:nowrap;
+		  overflow:hidden;
+		  text-overflow:ellipsis;
+		 	}
+ 	.content {
+ 		position: relative;
+ 		margin-top: .4rem;
+ 		margin-bottom: .4rem;
+ 		color: #656565;
+ 		overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: initial;
+    }
+    
+ 	}
+ .footer {
+ 			padding-top: .4rem;
+    	border-top: 1px solid #F2F2F2;
+    	padding-bottom: .2rem;
+	}
+ .vlabel {
+ 	width: 0.32rem; 
+ 	position: relative; 
+ 	top: .04rem;
+ }
+ .label {
+ 	position: relative;
+ 	display: inline-block;
+ 	background: #CC723C;
+ 	color: #FFFFFF;
+  padding: 2px 3px 1px 3px;
+  font-size: 0.2rem;
+  transform:scale(0.9);
+  top: -.03rem;
+ }
+ .imgBox {
+ 	margin-bottom: 0.3rem;
+ 	img {
+ 		width: 2.1rem;
+ 		height: 2.1rem;
+ 		margin-left: 0.2rem;
+ 	}
+ }
+</style>

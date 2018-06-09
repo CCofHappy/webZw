@@ -8,6 +8,8 @@ const api = {
 	sendSMSCode: function(postData) {
 		return fly.post("/app/person/sendSMSCode", postData);
 	},
+
+	//	拍卖部分接口-----------------------------------------------------------------------------------------------------------------------------------------------------------------start
 	// 首页接口
 	getData: function() {
 		return fly.post("/app/homepage/getData");
@@ -29,6 +31,13 @@ const api = {
 	*/
 	sessionlist: function(postData) {
 		return fly.post("/app/auction/sessionInfoPage", postData);
+	},
+	/*根据拍场类型 查询拍场
+	入参：
+	     page---页码，rows---单页数量， auctionSessionType（0.默认拍场 1.每日一拍 2.推荐收藏区 3.饮用精选拍区 4.价格封顶拍区）
+	*/
+ 	getAreaAuction: function(postData) {
+		return fly.post("/app/homepage/getAreaAuction", postData);
 	},
 	/*拍场详情
   入参：
@@ -110,7 +119,7 @@ const api = {
 	   auctionSessionSeq  拍场序号
 	   customerSeq      用户序号
 	*/
-	getHighestPrice: function(postData){
+	getHighestPrice: function(postData) {
 		return fly.post('/app/person/getHighestPrice', postData);
 	},
 	/*洽谈
@@ -146,17 +155,17 @@ const api = {
 		return fly.post('/app/person/getTreaty', postData);
 	},
 	/*
-  订单申诉接口
-  入参：
-    auctionSessionSeq
-    customerSeq
+	  订单申诉接口
+	  入参：
+	    auctionSessionSeq
+	    customerSeq
    */
 	insertOrderExplain: function(postData) {
 		return fly.post('/app/person/insertOrderExplain', postData);
 	},
 	/*
-  去付款前的检查接口（暂时不理解，参照小程序写的）
-  入参：
+	  去付款前的检查接口（暂时不理解，参照小程序写的）
+	  入参：
     auctionSessionStr    字符串的选中去支付的拍场seq
    */
 	paymentCheck: function(postData) {
@@ -172,20 +181,72 @@ const api = {
 	paySnapshot: function(postData) {
 		return fly.post('/app/person/paySnapshot', postData);
 	},
+	/* 	确认收货
+	   入参：
+		订单seq
+   */
+	validateOrder: function(seq) {
+		return fly.post(`/app/person/validateOrder/${seq}`);
+	},
+	//	拍卖部分接口-----------------------------------------------------------------------------------------------------------------------------------------------------------------end
+
+	//  社区部分接口----------------------------------------------------------------------------------------------------------------------------------------------------------------start
+	/* 	交流贴列表
+	   入参：
+		page
+		rows
+		customerSeq   用户seq
+		orderBy       排序 1 默认排序 2 标签排序 3 按回复时间排序 4按回复数量排序
+		sort		  1 正序 2 倒序
+   */
+	queryInterflowList: function(postData) {
+		return fly.post('/app/bbs/post/assess/queryInterflowList', postData);
+	},
+	/* 	酒评贴列表
+	   入参：
+		page
+		rows
+		customerSeq   用户seq
+		orderBy       排序 1 默认排序 2 标签排序 3 按回复时间排序 4按回复数量排序
+		sort		  1 正序 2 倒序
+   */
+	wrlist: function(postData) {
+		return fly.post('/app/bbs/post/assess/list', postData);
+	},
+	/* 	帖子点赞
+	   入参：
+		pid
+		uid    登录用户
+		type   类型1：分享帖，2：酒评贴，3交流贴
+   */
+	insertPostPraise: function(postData) {
+		return fly.post('/app/bbs/post/assess/insertPostPraise', postData);
+	},
+
+	/* 	关注用户
+	   入参：
+		followUid    发帖子的用户
+		uid	      登录用户
+   */
+	follow: function(postData) {
+		return fly.post('/app/bbs/post/follow', postData);
+	},
+
+	//	公共模块接口(包括支付,地址,物流,发票等)---------------------------------------------------------------------------------------------------------------------------------------------start
 
 	/*
-  中威钱包支付(保证金支付)
-  入参：
-    auctionSessionSeq
-    customerSeq
-    auctionGoodsSeq
-    payType   //类型是：支付拍场保证金 101; 支付拍品保证金 102; 充值 103; 订单支付 104;
-    totalFee    保证金金额
-    bondType    2---竞拍保证金
-    中威钱包支付(拍卖订单支付)
-    入参：
-      
-     */
+	  中威钱包支付(保证金支付)
+	  入参：
+	    auctionSessionSeq
+	    customerSeq
+	    auctionGoodsSeq
+	    payType   //类型是：支付拍场保证金 101; 支付拍品保证金 102; 充值 103; 订单支付 104;
+	    totalFee    保证金金额
+	    bondType    2---竞拍保证金
+	    中威钱包支付(拍卖订单支付)
+	    入参：
+	      
+	     */
 	walletPay: function(postData) {
 		return fly.post('/app/walletPay', postData);
 	},
@@ -200,9 +261,9 @@ const api = {
 		// return fly.post('http://wap.cwhisky.com/alipay/payment',postData);
 	},
 	/*银联支付
-   入参：
-    同支付宝支付一样
-    fromUrl   ---    支付成功后的跳转路径
+	   入参：
+	    同支付宝支付一样
+	    fromUrl   ---    支付成功后的跳转路径
    */
 	consume: function(postData) {
 		return fly.post('/unionpay/consume', postData);
@@ -261,7 +322,7 @@ const api = {
 		pCode --- 区级code
 	   */
 	addDeliveryAddr: function(postData) {
-		return fly.post('/app/person/addDeliveryAddr',postData);
+		return fly.post('/app/person/addDeliveryAddr', postData);
 	},
 	/* 	编辑收货地址
 	   入参：
@@ -277,14 +338,14 @@ const api = {
 		pCode --- 区级code
 	   */
 	editDeliveryAddr: function(postData) {
-		return fly.post('/app/person/editDeliveryAddr',postData);
+		return fly.post('/app/person/editDeliveryAddr', postData);
 	},
 	/* 	删除收货地址
 	   入参：
 		customerSeq,
 		deliveryAddrSeq   --- 收货地址seq
 	   */
-	delDeliveryAddr: function(customerSeq,deliveryAddrSeq) {
+	delDeliveryAddr: function(customerSeq, deliveryAddrSeq) {
 		return fly.post(`/app/person/delDeliveryAddr/${deliveryAddrSeq}/${customerSeq}`);
 	},
 	/* 	获取指定收货地址
@@ -294,15 +355,8 @@ const api = {
 	findByDeliveryAddr: function(deliveryAddrSeq) {
 		return fly.post(`/app/person/findByDeliveryAddr/${deliveryAddrSeq}`);
 	},
-	/* 	确认收货
-	   入参：
-		订单seq
-	   */
-	validateOrder: function(seq) {
-		return fly.post(`/app/person/validateOrder/${seq}`);
-	},
-	
-	
+	//	公共模块接口(包括支付,地址,物流等)---------------------------------------------------------------------------------------------------------------------------------------------end
+
 	//获取服务器时间
 	getServerTime: async function() {
 		let time;

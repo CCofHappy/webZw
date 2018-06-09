@@ -9,7 +9,7 @@
 	        <router-link :to="{name: 'shoppingBag'}" slot="right">
 	            <i class="iconfont icon-Slicex11"></i>
 	        </router-link>
-	        <router-link to="#" slot="right">
+	        <router-link :to="{name: 'mallOrder'}" slot="right">
 	            <i class="iconfont icon--me-7"></i>
 	        </router-link>
 	    </yd-navbar>
@@ -57,7 +57,7 @@
 	    		<img class="imagesHead" v-for="item,key in imagesHeads" :style="{left: -0.14*key+'rem'}" :key="key" :src="item">
 	    		<i class="iconfont icon-more1 iconMore" :style="{left: -0.14*(imagesHeads.length-1)+'rem'}"></i>
 		    	<span class="dgray padding-left-xm groupNum">10人摇中</span>
-		    	<i class="groupIconRight iconfont icon-Slicex13" @click="clickGroupBuy"></i>
+		    	<i class="groupIconRight iconfont icon-Slicex13" @click="clickRockResult"></i>
 		    </div>
 	    </div>
 	    <div class="segmentation" style="height: 1px;"></div>
@@ -76,6 +76,7 @@
 		    	<i class="groupIconRight iconfont icon-Slicex13" @click="clickGroupBuy"></i>
 		    </div>
 	    </div>
+	    <!-- 中威网服务 -->
 	    <div class="mallRemark">
 			<yd-grids-group :rows="4" style="height: 2.36rem;" class="padding-right-lg">
 		        <yd-grids-item v-for="item,key in mallInfoIconTitle" :key="key">
@@ -84,7 +85,6 @@
 		        </yd-grids-item>
 		    </yd-grids-group>
 	        <i class="iconfont icon-Slicex13 iconRight" @click="clickPopup(0)"></i>
-	        
 	    </div>
 	    <div class="margin-top-xd" style="position: relative;">
 	    	<span class="fs18 dgray padding-left-xm fw500">商品信息</span>
@@ -134,9 +134,9 @@
 	        <!-- <div class="rockSubmitBtn">
 	        	<yd-button class="sky-btn sky-btn-orange" type="primary">编号：HM12312<p>您已缴纳报名费：￥300</p></yd-button>
 	        </div> -->
+	    </footer>
 
-	      </footer>
-
+		<!-- 可滚动的底部弹窗 -->
 		<mt-popup
 		  v-model="mallRemarkPopup"
 		  position="bottom" class="canRollPopup">
@@ -171,7 +171,6 @@
 		<!-- 摇号未开始提示 -->
 		<yd-popup v-model="rockTip" position="center" width="75%">
             <div class="tooltip">
-            	<!-- <span class="iconfont icon-cuowu" style="position: absolute; right: -.2rem; top: -.2rem; font-size: .48rem;"></span> -->
                 <p class="firstLine">
                     摇号将在2018-04-01 14:30开始
                 </p>
@@ -182,6 +181,7 @@
                 	<yd-button style="width: 90%;" @click.native="rockTip = false">确认</yd-button>
                 </div>
             </div>
+            <i class="iconfont icon-cuowu closeIcon" @click="rockTip = false"></i>
         </yd-popup>
 		<!-- 购买弹窗 -->
 		<yd-popup v-model="buyPopup" position="bottom">
@@ -219,7 +219,6 @@
 	            </div>
             </div>
         </yd-popup>
-		
 
 	</div>	
 
@@ -355,6 +354,9 @@
 		    clickPopup( popupType ) {
 		    	this.popupType = popupType;
 		    	this.mallRemarkPopup = true;
+		    },
+		    clickRockResult() {
+		    	this.$router.push({name:"rockResult"});
 		    }
 		},
 		components: {
@@ -364,6 +366,7 @@
 			mallInfoRemark
 		},
 		mounted() {
+			this.rockTip = true;
 			this.$nextTick(function(){
 		       window.addEventListener('scroll', this.handleScroll)
 		    })
@@ -438,6 +441,12 @@
 			color: #979797; 
 			span { color: #282828; }
 		}
+		.rightSpan {  
+			position: absolute; 
+			left: 4.9rem; 
+			color: #979797; 
+			span { color: #282828; }
+		}
 	}
 
 	.mallInfo span {
@@ -484,12 +493,7 @@
 	}
 
 	
-	.rightSpan {  
-		position: absolute; 
-		left: 4.9rem; 
-		color: #979797; 
-		span { color: #282828; }
-	}
+	
 	
 
 	.yd-grids-4 { background-color: #F8F8F8; }

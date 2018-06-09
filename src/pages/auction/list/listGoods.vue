@@ -8,9 +8,7 @@
             </yd-list>
             <span slot="doneTip">没有更多内容~~</span>
              <!-- 加载中提示，不指定，将显示默认加载中图标 -->
-            <div slot="loadingTip">
-              <scrolLoading></scrolLoading>
-            </div>
+            <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
         </yd-infinitescroll>
         <yd-backtop></yd-backtop>
     </yd-pullrefresh>

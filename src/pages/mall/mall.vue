@@ -20,8 +20,8 @@
     </div>
     <bannera class="margin-top-lg" :bannerData="bannerData1"></bannera>
 
-    <!-- 限时抢购 -->
-    <div v-if="outSale.length">
+    <!-- 限时抢购  v-if="outSale.length" -->
+    <div>
        <div class="lists padding-top-md">
         <router-link :to="{name: 'flashSale'}">
           <div class="child">
@@ -32,26 +32,6 @@
           </div>
         </router-link>
           <yd-list theme="4">
-              <!-- <yd-list-item v-for="item, key in list" :key="key">
-                  <img slot="img" :src="item.img">
-                  <span slot="title">{{item.title}}</span>
-                  <yd-list-other slot="other">
-                      <div>
-                          <span class="demo-list-price"><em>¥</em>{{item.price}}</span>
-                          <span class="demo-list-del-price">¥{{item.w_price}}</span>
-                          <yd-flexbox>
-                              <yd-flexbox-item><yd-progressbar class="progress" type="line" :progress="progress" trail-width="8" stroke-width="8" trail-color="#FDB081"></yd-progressbar></yd-flexbox-item>
-                              <div>&nbsp;&nbsp;&nbsp;</div>
-                              <yd-flexbox-item class="flexbox-fontSize">剩余200件</yd-flexbox-item>
-                          </yd-flexbox>
-                          <yd-flexbox class="flexBottom">
-                              <div class="discount">￥10000</div>
-                              <yd-flexbox-item class="originalPrice">￥13000</yd-flexbox-item>
-                          </yd-flexbox>
-                          <yd-button class="performBtn" bgcolor="#282828" color="#FFF">马上抢</yd-button>
-                      </div>
-                  </yd-list-other>
-              </yd-list-item> -->
               <rush-to-purchase :itemData="list[0]" :purchaseType="true"></rush-to-purchase>
           </yd-list>
        </div>
@@ -133,7 +113,7 @@
     data () {
       return {
          Vloading:false,
-         bannerData1:[],
+         bannerData1:[{pic:"//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg"},{pic:"//img1.shikee.com/try/2016/06/21/10172020923917672923.jpg"},{pic:"//img1.shikee.com/try/2016/06/23/15395220917905380014.jpg"},{pic:"//img1.shikee.com/try/2016/06/25/14244120933639105658.jpg"}],
          bannerData2:[],
          bannerData3:[],
          bannerData4:[],

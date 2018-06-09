@@ -1,29 +1,12 @@
 <template>
   <div style="padding-bottom: 1.4rem;">
-     
     <div v-if="Number(this.$localStorage.get('client'))">
       <yd-navbar :fixed="true" class="text-center">
         <img slot="center" src="@/assets/logo-txt.png" style="width: 1.6rem;height: auto;">
-         <!--  <router-link to="#" slot="left">
-            <div class="iconBox">
-              <i class="iconfont icon-Slicex10"></i>
-              <span>消息</span>
-            </div>
-          </router-link>
-          <div slot="center" class="search"><i class="iconfont icon-sousuo"></i> 快速搜索</div>
-          <router-link to="#" slot="right">
-              <div class="iconBox" style="margin-right:10px">
-                <i class="iconfont icon-Slice8"></i>
-                <span>送拍</span>
-              </div>
-              <div class="iconBox">
-                <i class="iconfont icon-Slice8"></i>
-                <span>分类</span>
-              </div>
-          </router-link> -->
       </yd-navbar>
+      <div style="height: 1rem;"></div>
     </div>
-    <bannera class="margin-top-lg" :bannerData="bannerData1"></bannera>
+    <bannera :bannerData="bannerData1"></bannera>
      <div class="center-menus">
       <router-link :to="{name:'hotSession'}">
         <div class="left">
