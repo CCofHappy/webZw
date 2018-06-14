@@ -174,7 +174,7 @@ export default {
         .then((res) => {
           if(res.state){
           	// 把支付前地址存起来，用于三方支付完之后跳转
-          	this.$localStorage.set('payUrl',window.location.href);
+          	this.local.set('payUrl',window.location.href);
             this.$router.replace({
             	name:'checkout',
             	params:{Sseq:this.pending}
@@ -208,11 +208,11 @@ export default {
 
 <style lang="less">
  .orderMenus {
-  .yd-tab-nav {
+  .yd-tab-nav-nomal {
     position: fixed;
     top: 1rem;
     width: 100% !important;
-    z-index: 99;
+    z-index: 99999;
   }
   .yd-tab-nav-item:not(:last-child):after {
     border:none;

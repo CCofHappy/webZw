@@ -1,7 +1,7 @@
 <template>
   <div style="padding-bottom: 1.4rem;">
     <loading v-if="Vloading"></loading>
-    <div v-if="Number(this.$localStorage.get('client'))">
+    <div v-if="Number(this.local.get('client'))">
       <yd-navbar :fixed="true" class="text-center">
           <router-link to="#" slot="left">
             <div class="iconBox">
@@ -12,8 +12,8 @@
           <div slot="center" class="search" @click="clickSearch"><i class="iconfont icon-sousuo"></i> 快速搜索</div>
           <router-link to="#" slot="right">
               <div class="iconBox">
-                <i class="iconfont">&#xe65a;</i>
-                <span>购物车</span>
+                <i class="iconfont icon-Slicex11"></i>
+                <span>购物袋</span>
               </div>
           </router-link>
       </yd-navbar>
@@ -221,7 +221,7 @@
   .flexBottom {position: absolute; bottom: .1rem;}
   .child {position:relative;}
   .child p {padding-top: .1rem;}
-  .rightSpan {position: absolute; font-size: .24rem; right:0px;}
+  .rightSpan {position: absolute; font-size: .24rem; right:0;}
 
   .capacity {font-size:.24rem; color:#979797; padding-top: .1rem;}
 

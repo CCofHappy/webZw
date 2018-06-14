@@ -1,8 +1,11 @@
 <template>
   <div class="rich-view">
     <transition :name="transitionName"  mode="out-in">
-      <router-view class="rich-view"></router-view>
-    </transition>
+			<keep-alive class="child-view" >
+			    <router-view v-if="$route.meta.keepAlive"></router-view>
+			</keep-alive>
+			<router-view  class="child-view" v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
     <Tabbar :fixed="true"></Tabbar>
   </div>
 </template>

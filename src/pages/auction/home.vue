@@ -1,6 +1,6 @@
 <template>
   <div style="padding-bottom: 1.4rem;">
-    <div v-if="Number(this.$localStorage.get('client'))">
+    <div v-if="Number(this.local.get('client'))">
       <yd-navbar :fixed="true" class="text-center">
         <img slot="center" src="@/assets/logo-txt.png" style="width: 1.6rem;height: auto;">
       </yd-navbar>
@@ -26,15 +26,12 @@
         </router-link>
       </div>
     </div>
-    <div v-if="bannerData4">
-      <!-- <router-link to="/session/hot"> -->
+    <div v-if="bannerData4.length">
         <div class="box-type">
           <b class="cn">正在热拍</b>
           <div class="en margin-top-xs">UNDER AUCTION</div>
-          <!-- <i class="iconfont icon-Slicex13"></i> -->
         </div>
-      <!-- </router-link> -->
-      <bannerd class="list-child" :bannerData="bannerData4" :serverTime="serverTime"></bannerd>
+      <bannerd v-for="item,key in bannerData4" :key="key" class="list-child" :bannerData="item"></bannerd>
     </div>
 
     <div v-if="daySale.length">
@@ -63,14 +60,11 @@
     </div>
 
 
-    <div v-if="outSale.length">
-      <!-- <router-link to="/session/history"> -->
+    <div v-if="bannerData2.length">
         <div class="box-type">
           <b class="cn">历史拍卖</b>
           <div class="en margin-top-xs">Recommended collection</div>
-          <!-- <i class="iconfont icon-Slicex13"></i> -->
         </div>
-     <!--  </router-link> -->
         <!-- 拍场轮播 -->
       <bannerb :bannerData="bannerData2"></bannerb>
        
@@ -121,42 +115,29 @@ export default {
     }
   },
   computed: {
-      recruitScrollY(){
-        return this.$store.state.position.recruitScrollY;
-      }
+ 
   },
   methods: {
   
   },
-  beforeRouteLeave (to, from, next) {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-    this.$store.commit('eposition',scrollTop)
-    next()
-  },
+ 
   mounted() {
    this.$store.commit('setLoading',true);
    fly.all([
       this.api.getData(), 
-      this.api.history(), 
+      this.api.history({auctionSessionType:0}), 
       this.api.sessionlist({page:1,rows:5,state:["4"]}),
-      this.api.getServerTime()
     ])
-    .then(fly.spread((getData, history, sessionlist,serverTime) => {
-       this.bannerData1 = getData.data.recommendList;
-       this.bannerData2 = sessionlist.data.dataList;
-       this.bannerData3 = getData.data.recommend2;
-       this.bannerData4 = getData.data.recommendSession;
-       this.daySale = getData.data.SessionRecommend1;
+    .then(fly.spread((getData, history, sessionlist) => {
+       this.bannerData1 = getData.data.recommendList ? getData.data.recommendList : [];
+       this.bannerData2 = sessionlist.data.dataList ? sessionlist.data.dataList : [];
+       this.bannerData3 = getData.data.recommend2 ? getData.data.recommend2 : [];
+       this.bannerData4 = getData.data.recommendSession ? getData.data.recommendSession : [];
+       this.daySale = getData.data.SessionRecommend1 ? getData.data.SessionRecommend1 : [];
        if(history.state){
         this.outSale = history.data;
        }
-       this.serverTime = serverTime;
-       setTimeout(()=>{
-         this.$nextTick(function () {
-          window.scroll(0,this.recruitScrollY);
-           this.$store.commit('setLoading',false);
-        });
-       },500)
+       this.$store.commit('setLoading',false);
     }))
   },
   watch: {

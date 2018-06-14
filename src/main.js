@@ -7,11 +7,12 @@ import YDUI from 'vue-ydui'
 import { Radio, Dropdown,DropdownMenu,DropdownItem,} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueLazyload from 'vue-lazyload'  
-// import FastClick from 'fastclick'     //解决点击事件延迟问题
-import VueLocalStorage from 'vue-localstorage'
+import FastClick from 'fastclick'     //解决点击事件延迟问题
 import 'vue-ydui/dist/ydui.rem.css'
 import api from './utils/api'
 import {VeeValidate, Veeconfig} from './utils/validation.js';   //验证规则
+import session from './utils/storage/session.js';  
+import local from './utils/storage/local.js';  
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css' //引入swiper滑块样式
 // import './styles/index.css'
@@ -28,13 +29,15 @@ Vue.use(Radio);
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
- 
 Vue.use(VueAwesomeSwiper);
 Vue.use(VeeValidate,Veeconfig);
-Vue.use(VueLocalStorage)
 Vue.config.productionTip = false
 Vue.prototype.api = api;
 Vue.prototype.loadingMint = Indicator;
+FastClick.attach(document.body)
+
+Vue.prototype.session = session;
+Vue.prototype.local = local;
 // ajax请求
 Vue.prototype.ajaxPost = function(url,postData,callback){
   fly.post(url,postData)
@@ -68,12 +71,19 @@ Vue.use(YDUI)
 Vue.use(VueLazyload)  /* 图片懒加载插件 */
 // 导航守卫
 router.beforeEach((to, from, next) => {
+		let scrollTop = window.scrollY;
+	  if (from.name) {
+      session.set(from.name, {
+        history: true,
+        scrollTop: scrollTop
+      })
+    }
     // 判断设备入口
-    // 页面上判断  v-if="Number(this.$localStorage.get('client'))"
+    // 页面上判断  v-if="Number(this.local.get('client'))"
     if(to.query.platform == 'app'){
-        Vue.localStorage.set('client', 0);
+        local.set('client', 0);
       }else {
-        Vue.localStorage.set('client', 1);
+        local.set('client', 1);
       }
 
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
@@ -90,6 +100,16 @@ router.beforeEach((to, from, next) => {
     else {
         next();
     }
+})
+ 
+router.afterEach((toRoute, fromRoute) => {
+ 	const to = toRoute.name
+  const h = session.get(to)
+  if (h && h.scrollTop >= 0) {
+    Vue.nextTick(() => {
+      window.scroll(0, h.scrollTop)
+    })
+  }
 })
 new Vue({
   el: '#app',

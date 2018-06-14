@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <div class="flex mallList" :style="{paddingTop: topBottomDistance, paddingBottom: topBottomDistance}">
+        <div class="flex mallOrderInfo" :style="{paddingTop: topBottomDistance, paddingBottom: topBottomDistance}">
             <div class="secondLine">
                 <img src="//img1.shikee.com/try/2016/06/21/10172020923917672923.jpg">
             </div>
@@ -37,9 +37,7 @@
 </script>
 
 <style lang="less" scoped>
-    .mallList {
-        // padding-bottom: .4rem;
-        // padding-top: .4rem;
+    .mallOrderInfo {
         background-color: white;
         .secondLine {
             margin-left: .24rem;

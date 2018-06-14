@@ -167,7 +167,7 @@ export default {
   },
   computed: {
       payUrl() {
-        return this.$localStorage.get('payUrl')
+        return this.local.get('payUrl')
       }
   },
   methods: {
@@ -266,7 +266,7 @@ export default {
 	    break;
 	    //进来如果是订单支付页面
 	    case 'salePay' :
-	    	this.postData = JSON.parse(this.$localStorage.get('payOrder'))
+	    	this.postData = this.local.get('payOrder')
 	    	this.postData.fromUrl = this.payUrl
 	    break;
 	    

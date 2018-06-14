@@ -34,6 +34,7 @@ export default {
       postData:{
         page:1,
         rows:10,
+        customerSeq:Cookie.get('userSeq') 
       },
     }
   },
@@ -109,13 +110,16 @@ export default {
     switch(this.$route.name) {
       case 'history':
       this.postUrl = 'app/auction/getMoreHisAuction'    //历史拍卖
+      this.postData.auctionSessionType = 0;
       break;
       case 'dailyHistory':
       // 缺少接口，暂时用了历史拍品的接口替代测试
       this.postUrl = 'app/auction/getMoreHisAuction'   //每日一拍历史拍卖
+      this.postData.auctionSessionType = 1;
       break;
       case 'pick':
       this.postUrl = 'app/homepage/getChoiceAndCollection' //饮用精选
+      this.postData.auctionSessionType = 3;
       break;
       default:
       this.$router.push({name:'error'})

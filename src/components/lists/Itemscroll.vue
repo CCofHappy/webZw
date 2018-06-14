@@ -132,7 +132,7 @@ export default {
          // 去交保证金
         goPayBoon() {
             // 把支付前地址存起来，用于三方支付完之后跳转
-            this.$localStorage.set('payUrl',window.location.href)
+            this.local.set('payUrl',window.location.href)
             this.$router.replace({
                 name:'boonPay',
                 query:{

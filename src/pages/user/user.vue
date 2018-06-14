@@ -32,8 +32,9 @@ export default {
   	
   },
   mounted() {
-     
+    
   },
+  
   watch: {
     // 如有必要再加路由监听
     $route() {

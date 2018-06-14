@@ -128,7 +128,7 @@ export default {
   	 			data.auctionGoodsSeqStr += e.auctionGoodsSeq + ","
   	 			data.auctionSessionSeqStr += e.auctionSessionSeq + ","
   	 		})
-  	 	  this.$localStorage.set('payOrder',JSON.stringify(data))
+  	 	  this.local.set('payOrder',data)
   	 		this.$router.replace({
   	 			name:'salePay'
   	 		})

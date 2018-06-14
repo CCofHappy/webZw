@@ -42,8 +42,16 @@
 				<div>
 					<span class="red fs20">*</span><span class="">上传凭证：</span>
 				</div>
-				<div style="padding: .3rem 0;">
-					<img src="//img1.shikee.com/try/2016/06/25/14244120933639105658.jpg" style="width: 2.24rem; height: 2.24rem;">
+				<div style="padding: .3rem 0;" class="flex">
+					<div>
+						<img src="//img1.shikee.com/try/2016/06/25/14244120933639105658.jpg" style="width: 2.24rem; height: 2.24rem;">
+					</div>
+					<div style="width: 2.24rem; height: 2.24rem; margin-left: .14rem; border: 0.5px dashed #D8D8D8;">
+						<p style="margin-top: .56rem; text-align: center;"><i class="iconfont icon--photo"></i></p>
+						<p style="margin-top: .22rem; text-align: center;" class="fs12 fblack">上传凭证</p>
+						<p style="text-align: center; color: #979797;" class="fs10">最多6张</p>
+					</div>
+					
 				</div>
 	        </div>
 	        <div class="bottomDiv">

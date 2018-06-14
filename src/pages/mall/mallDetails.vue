@@ -80,7 +80,8 @@
 	    <div class="mallRemark">
 			<yd-grids-group :rows="4" style="height: 2.36rem;" class="padding-right-lg">
 		        <yd-grids-item v-for="item,key in mallInfoIconTitle" :key="key">
-		        	<img slot="icon" :src="item.icon">
+		        	<!-- <img slot="icon" :src="item.icon"> -->
+		        	<i slot="icon" class="iconfont" :class="item.icon"></i>
 		            <span slot="text" class="fs12">{{item.infoTitle}}</span>
 		        </yd-grids-item>
 		    </yd-grids-group>
@@ -299,19 +300,19 @@
 				mallInfoIconTitle: [
 					{
 						infoTitle: "正品保证",
-						icon: "http://static.ydcss.com/ydui/img/logo.png"
+						icon: "icon-Slicex25"
 					},
 					{
 						infoTitle: "破损包赔",
-						icon: "http://static.ydcss.com/ydui/img/logo.png"
+						icon: "icon-Slicex18"
 					},
 					{
 						infoTitle: "不退不换",
-						icon: "http://static.ydcss.com/ydui/img/logo.png"
+						icon: "icon-Slicex17"
 					},
 					{
 						infoTitle: "满300包邮",
-						icon: "http://static.ydcss.com/ydui/img/logo.png"
+						icon: "icon-Slicex24"
 					}
 				],
 				imagesHeads: [
@@ -397,7 +398,7 @@
 	.iconfont { color: #282828; }
 	.marginTop02 { 
 		margin-top: .2rem; 
-		.discountBtn { color: #CD733B; font-size: 10px; border: 1px solid #CD733B; }
+		.discountBtn { color: #CD733B; font-size: .2rem; border: 1px solid #CD733B; }
 	}
 	.discount {font-size: .36rem; color: #C93B00; padding-right: .1rem; padding-left: .24rem;}
 	.originalPrice {font-size: .24rem; text-decoration: line-through; color: #979797;}
@@ -429,10 +430,10 @@
 	
 	.mallInfoDiv {
 		 margin-top: .3rem; 
-		 height: 150px; 
+		 height: 3rem; 
 	}
 	.mallInfo {
-	 	height: 50px; 
+	 	height: 1rem; 
 	 	margin-left: .24rem; 
 	 	margin-right: .24rem;
 	 	.leftSpan { 

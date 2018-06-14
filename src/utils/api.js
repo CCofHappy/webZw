@@ -15,12 +15,12 @@ const api = {
 		return fly.post("/app/homepage/getData");
 	},
 	//首页历史拍品
-	history: function() {
-		return fly.post("/app/auction/historyAuction");
+	history: function(postData) {
+		return fly.post("/app/auction/historyAuction",postData);
 	},
 	/*所有历史拍品(需要传入的参数)
 	入参：
-	  page---页码,rows---单页数量
+	  page---页码,rows---单页数量,auctionSessionType---（0.默认拍场 1.每日一拍 2.推荐收藏区 3.饮用精选拍区 4.价格封顶拍区）
 	*/
 	historylist: function(postData) {
 		return fly.post("/app/auction/getMoreHisAuction", postData);
@@ -212,6 +212,30 @@ const api = {
    */
 	wrlist: function(postData) {
 		return fly.post('/app/bbs/post/assess/list', postData);
+	},
+	/* 	分享贴列表
+	   入参：
+		page
+		rows
+		customerSeq   用户seq
+		orderBy       排序 1 默认排序 2 标签排序 3 按回复时间排序 4按回复数量排序
+		sort		  1 正序 2 倒序
+		newOrOld      最新分享1历史分享2
+		state         审核状态0待审核1通过 2拒绝
+		isTop         暂时不清楚
+   */
+	sharelist: function(postData) {
+		return fly.post('/app/bbs/post/list', postData);
+	},
+	/* 	帖子详情
+	   入参：
+		page
+		rows
+	 	pid    帖子id
+	 	uid    发帖人id
+   */
+	postDetail: function(postData) {
+		return fly.post('/app/bbs/post/postDetail', postData);
 	},
 	/* 	帖子点赞
 	   入参：

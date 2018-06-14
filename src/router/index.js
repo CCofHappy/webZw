@@ -31,7 +31,7 @@ export default new Router({
 					meta: {
 						title: '社区',
 						requireAuth: false,
-						keepAlive: false
+						keepAlive: true
 					}
 				},
 				{
@@ -56,6 +56,9 @@ export default new Router({
 				},
 			]
 		},
+		
+//		拍卖模块----------------------------------------------------------------------------------------start
+		
 		// 拍场
 		{
 			path: '/session',
@@ -242,6 +245,7 @@ export default new Router({
 
 			]
 		},
+//		拍卖模块----------------------------------------------------------------------------------------end
 		{
 			path: '/pay',
 			component: parentComponent,
@@ -283,6 +287,170 @@ export default new Router({
 				},
 			]
 		},
+		
+// 商城模块--------------------------------------------------------------------------------------------------start
+		{
+			path: '/mallBox',
+			component: parentComponent,
+			children: [{
+				path: 'search',
+				name: 'search',
+				component: resolve => require(['../pages/mall/search/search.vue'], resolve),
+				meta: {
+					title: '',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'searchResult',
+				name: 'searchResult',
+				component: resolve => require(['../pages/mall/search/searchResult.vue'], resolve),
+				meta: {
+					title: '',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'allMall',
+				name: 'allMall',
+				component: resolve => require(['../pages/mall/allMall.vue'], resolve),
+				meta: {
+					title: '全部商品',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'flashSale',
+				name: 'flashSale',
+				component: resolve => require(['../pages/mall/flashSale.vue'], resolve),
+				meta: {
+					title: '限时抢购',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'mallDetails',
+				name: 'mallDetails',
+				component: resolve => require(['../pages/mall/mallDetails.vue'], resolve),
+				meta: {
+					title: '商品详情',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'groupBuy',
+				name: 'groupBuy',
+				component: resolve => require(['../pages/mall/groupBuy.vue'], resolve),
+				meta: {
+					title: '拼团人数',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'shoppingBag',
+				name: 'shoppingBag',
+				component: resolve => require(['../pages/mall/shoppingBag.vue'], resolve),
+				meta: {
+					title: '购物袋',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'rockResult',
+				name: 'rockResult',
+				component: resolve => require(['../pages/mall/rockResult.vue'], resolve),
+				meta: {
+					title: '摇号结果',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'mallOrder',
+				name: 'mallOrder',
+				component: resolve => require(['../pages/mall/mallOrder/mallOrder.vue'], resolve),
+				meta: {
+					title: '商城订单',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'mallOrderDetail',
+				name: 'mallOrderDetail',
+				component: resolve => require(['../pages/mall/mallOrder/mallOrderDetail.vue'], resolve),
+				meta: {
+					title: '订单详情',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'afterSaleServe',
+				name: 'afterSaleServe',
+				component: resolve => require(['../pages/mall/mallOrder/afterSaleServe.vue'], resolve),
+				meta: {
+					title: '售后服务',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'applyRefund',
+				name: 'applyRefund',
+				component: resolve => require(['../pages/mall/mallOrder/applyRefund.vue'], resolve),
+				meta: {
+					title: '申请退款',
+					requireAuth: true
+				}
+			},
+			{
+				path: 'refundDetail',
+				name: 'refundDetail',
+				component: resolve => require(['../pages/mall/mallOrder/refundDetail.vue'], resolve),
+				meta: {
+					title: '退款详情',
+					requireAuth: true
+				}
+			}]
+		},
+// 商城模块--------------------------------------------------------------------------------------------------end
+
+// 社区模块--------------------------------------------------------------------------------------------------start
+		{
+			path: '/communityBox',
+			component: parentComponent,
+			children: [
+				//搜索页
+				{
+					path:'communitySeach',
+					name:'communitySeach',
+					component: resolve => require(['../pages/common/search/search.vue'], resolve),
+					meta: {
+						title: '搜索',
+						requireAuth: false
+					}
+				},
+//				帖子搜索结果页
+				{
+					path:'communitySeachResult',
+					name:'communitySeachResult',
+					component: resolve => require(['../pages/common/search/result.vue'], resolve),
+					meta: {
+						title: '帖子搜索结果',
+						requireAuth: false
+					}
+				},
+				//帖子详情
+				{
+					path:'communityDetail/:pid/:uid',
+					name:'communityDetail',
+					component: resolve => require(['../pages/community/detail.vue'], resolve),
+					meta: {
+						title: '帖子详情',
+						requireAuth: false
+					}
+				}
+			]
+		},
+// 社区模块--------------------------------------------------------------------------------------------------end
+
 		// 所有模块公用的，比如地址管理，物流，发票等
 		{
 			path: '/common',
@@ -413,128 +581,6 @@ export default new Router({
 				component: demo
 			}]
 		},
-		// 商城路由
-		{
-			path: '/mallBox',
-			component: parentComponent,
-			children: [{
-				path: 'search',
-				name: 'search',
-				component: resolve => require(['../pages/mall/search/search.vue'], resolve),
-				meta: {
-					title: '',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'searchResult',
-				name: 'searchResult',
-				component: resolve => require(['../pages/mall/search/searchResult.vue'], resolve),
-				meta: {
-					title: '',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'allMall',
-				name: 'allMall',
-				component: resolve => require(['../pages/mall/allMall.vue'], resolve),
-				meta: {
-					title: '全部商品',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'flashSale',
-				name: 'flashSale',
-				component: resolve => require(['../pages/mall/flashSale.vue'], resolve),
-				meta: {
-					title: '限时抢购',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'mallDetails',
-				name: 'mallDetails',
-				component: resolve => require(['../pages/mall/mallDetails.vue'], resolve),
-				meta: {
-					title: '商品详情',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'groupBuy',
-				name: 'groupBuy',
-				component: resolve => require(['../pages/mall/groupBuy.vue'], resolve),
-				meta: {
-					title: '拼团人数',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'shoppingBag',
-				name: 'shoppingBag',
-				component: resolve => require(['../pages/mall/shoppingBag.vue'], resolve),
-				meta: {
-					title: '购物袋',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'rockResult',
-				name: 'rockResult',
-				component: resolve => require(['../pages/mall/rockResult.vue'], resolve),
-				meta: {
-					title: '摇号结果',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'mallOrder',
-				name: 'mallOrder',
-				component: resolve => require(['../pages/mall/mallOrder/mallOrder.vue'], resolve),
-				meta: {
-					title: '商城订单',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'mallOrderDetail',
-				name: 'mallOrderDetail',
-				component: resolve => require(['../pages/mall/mallOrder/mallOrderDetail.vue'], resolve),
-				meta: {
-					title: '订单详情',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'afterSaleServe',
-				name: 'afterSaleServe',
-				component: resolve => require(['../pages/mall/mallOrder/afterSaleServe.vue'], resolve),
-				meta: {
-					title: '售后服务',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'applyRefund',
-				name: 'applyRefund',
-				component: resolve => require(['../pages/mall/mallOrder/applyRefund.vue'], resolve),
-				meta: {
-					title: '申请退款',
-					requireAuth: true
-				}
-			},
-			{
-				path: 'refundDetail',
-				name: 'refundDetail',
-				component: resolve => require(['../pages/mall/mallOrder/refundDetail.vue'], resolve),
-				meta: {
-					title: '退款详情',
-					requireAuth: true
-				}
-			}]
-		}
 		// 下面是嵌套路由、动态路由示例-------------------------------start
 		/*    {
 				path: 'a',
@@ -566,6 +612,5 @@ export default new Router({
 			},
 		*/
 		// ----------------------------------------------------------------------end
-	]
-
+	],
 })

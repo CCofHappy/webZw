@@ -2,18 +2,18 @@
 <template>
 	<div>
 		<titleHead :fixed="true" :bg="'#F7F7F7'"></titleHead>
-		<div class="my-sale-box" :class="Number(this.$localStorage.get('client')) ? '' : 'top0'">
-			<div class="sequence padding-top-sm" v-if="!searchShow">
-				<span @click="show = true">{{condition}} <i class="iconfont icon-xiangxia"></i></span>
-				<span @click="searchShow = true" class="pull-right" style="margin-top: .05rem;">
-					<i class="iconfont icon--search fs16"></i>
-				</span>
-			</div>
-			<div class="sequence padding-top-xs" v-if="searchShow">
-				<yd-search v-model="searchValue" placeholder="输入拍品编码或者名称搜索" :on-submit="submitHandler" cancel-text=" "></yd-search>
-				<span class="pull-right margin-top-xs" @click="searchShow = false">
-						取消
+		<div class="my-sale-box" :class="Number(this.local.get('client')) ? '' : 'top0'">
+			<div class="sequence" v-if="!searchShow">
+				<div>
+					<span @click="show = true">{{condition}} <i class="iconfont icon-xiangxia"></i></span>
+					<span @click="searchShow = true" class="pull-right">
+						<i class="iconfont icon--search fs16"></i>
 					</span>
+				</div>
+			</div>
+			<div class="sequence" v-if="searchShow">
+				<yd-search class="sky-search" style="margin-top: -.1rem;" v-model="searchValue" placeholder="输入拍品编码或者名称搜索" :on-submit="submitHandler" cancel-text=" "></yd-search>
+				<span class="pull-right" @click="searchShow = false">取消</span>
 			</div>
 			<yd-tab v-model="tab">
 				<yd-tab-panel label="正在竞拍">
@@ -193,41 +193,6 @@
 </script>
 
 <style lang="less">
-	.my-sale-box {
-		.yd-tab-nav {
-			position: fixed;
-			top: 1rem;
-			width: 100% !important;
-		}
-		.yd-search {
-			flex-direction: row;
-			display: block;
-		}
-		.yd-search-input {
-			padding: 0;
-			input {
-				background: none;
-			}
-		}
-		.yd-search-input>.search-input {
-			background: none;
-		}
-	}
+ 
 	
-	.sequence {
-		position: fixed;
-		top: 1.8rem;
-		height: .8rem;
-		padding: 0 .2rem;
-		width: 100%;
-		border-bottom: 1px solid #F1F1F1;
-		i.icon-xiangxia {
-			font-size: 0.24rem;
-		}
-	}
-	
-	.sequence>div {
-		display: inline-block;
-		width: 85%;
-	}
 </style>

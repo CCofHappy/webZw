@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 1rem;"  v-if="Number(this.$localStorage.get('client'))">
+  <div style="height: 1rem;"  v-if="Number(this.local.get('client'))">
     <yd-tabbar :fixed="fixed">
         <yd-tabbar-item title="拍卖" link="/" :active="$route.name =='home'">
             <i slot="icon" class="iconfont icon-Slicex2"></i>

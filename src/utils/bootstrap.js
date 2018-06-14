@@ -114,13 +114,27 @@ Vue.filter('replaceSG', function (value) {
   value = value.replace(/\s/g,"")
   return value
 })
+//电话号码带****
 Vue.filter('phoneText', function (value) {
   if (!value) return ''
   value = value.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
   return value
 })
+//时间只取月份
 Vue.filter('replaceTime', function (value) {
   if (!value) return ''
   value = value.substring(5,16);
+  return value
+})
+//返回的价格大于一万就转成简写，并且去掉小数点后面的
+Vue.filter('Bigprice', function (value) {
+	if (!value) return ''
+  if(parseInt(value)>=10000){
+  	value = value/10000 + '万';
+  }else {
+   	if(value.split('.')[0]) {
+   		value = value.split('.')[0]
+   	}
+  }
   return value
 })

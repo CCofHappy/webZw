@@ -1,8 +1,8 @@
 <template>
-  <div class="meTitle" v-if="Number(this.$localStorage.get('client'))">
+  <div class="meTitle" v-if="Number(this.local.get('client'))">
       <yd-navbar :title="title || $route.meta.title" fontsize="0.36rem" :bgcolor="bg || '#F8F8F8'" :fixed="fixed" >
         <a href="javascript:void(0)" slot="left">
-          <yd-navbar-back-icon @click.native="$router.go(-1)"></yd-navbar-back-icon>
+          <i @click="$router.go(-1)" class="iconfont icon-Slicex9 margin-right-xs"></i>
         </a>
     </yd-navbar>
     <div style="height: 1rem;"></div>
